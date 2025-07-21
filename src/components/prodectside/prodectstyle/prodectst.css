@@ -1,0 +1,18 @@
+@keyframes mainrecipe {
+  0% { background-image: url('/maindish/chicken-larb-plate-with-dried-chilies-tomatoes-spring-onions-lettuce.jpg'); }
+  10% { background-image: url('/maindish/chicken-stir-fried-chili-along-with-bell-pepper-tomatoes-carrots.jpg'); }
+  20% { background-image: url('/maindish/chinese-noodles-with-fish-fillet-tomato-lettuce-inside-bowl.jpg'); }
+  30% { background-image: url('/maindish/edible-mushroom-risotto-with-parsley-parmesan-cheese-.jpg'); }
+  40% { background-image: url('/maindish/freshly-cooked-linguini-with-prawn-seafood.jpg'); }
+  50% { background-image: url('/maindish/fried-chicken-seafood-gourmet-plate.jpg'); }
+  60% { background-image: url('/maindish/grilled-salmon-with-asparagus-mushy-peas.jpg'); }
+  70% { background-image: url('/maindish/oven-baked-omelette-with-flowers-zucchini-pan.jpg'); }
+  80% { background-image: url('/maindish/penne-pasta-with-pesto-sauce-zucchini-green-peas-basil-italian-food.jpg'); }
+  90% { background-image: url('/maindish/sliced-a-a-chicken-steak-with-bread-carrots-cauliflower-turnips-corn-black-plate.jpg'); }
+  100% { background-image: url('/maindish/tasty-truffle-recipe-flat-lay.jpg'); }
+}
+
+.menu-mainrecipe {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: mainrecipe 30s linear infinite;
+}
