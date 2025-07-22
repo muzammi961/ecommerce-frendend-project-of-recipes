@@ -67,7 +67,7 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
     return (
    <div className="w-full h-auto md:h-screen overflow-hidden bgimage bg-cover bg-center bg-no-repeat">
       <div className="m-4 w-full flex items-center justify-between px-6 py-3">
-          <img src={hotellogo} alt="Logo"  className="border-0 rounded-lg  border-6 w-15 h-15"/>
+          <img src={hotellogo} alt="Logo"  className=" rounded-lg  border-6 w-15 h-15"/>
          <Link className="m-4 text-white px-4 py-2 rounded bg-white/10 backdrop-blur-3xl hover:bg-black/40 transition" to={'loginpage/'}>Login</Link>
       </div>   
           

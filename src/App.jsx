@@ -10,6 +10,8 @@ import Chengepassword from './components/authentication/chenge-password'
 import Sample from './components/sample'
 import Prodectdata from './components/prodectside/prodects'
 import Cartsection from './components/cart/cartsection'
+import Wishlist from './components/wishlist/wishlistsection'
+import Ordersection from './components/order/ordersection'
 function App() {
   const [values, setValue] = useState('')
 
@@ -24,6 +26,9 @@ function App() {
   <Route path='prodecthomeside/' element={<Prodecthomepage/>}/>
   <Route path='prodectdata/' element={<Prodectdata/>}/>
   <Route path='cartsection/' element={<Cartsection/>}/>
+  <Route path='wishlistsection/' element={<Wishlist/>}/>
+  <Route path='Ordersection/' element={<Ordersection/>}/>
+
 </Routes>
 </MYcontext.Provider>
       
