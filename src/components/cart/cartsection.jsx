@@ -44,36 +44,52 @@ function Cartsection() {
 
 
 
-  const oneByoneOrderFunc = (cartid) => {
-    console.log(cartid);
+const oneByoneOrderFunc = async (cartid) => {
+  console.log(cartid);
+  try {
+    const response = await axios.post(`http://127.0.0.1:8000/orders/OrderOneProductView/${cartid}/`,{},{headers: {Authorization: `Bearer ${token}`}});
+    toast.success('Cart added to order section');
+    navigation('/Ordersection')
+    console.log('Response:', response.data);
+  } catch (e) {
+    toast.error('Cart did not add to order section');
+    console.error('Error:', e.message);
+  }
+};
 
 
+// let [url, setUrl] = useState([]);
+const allOrderFunc = async () => {
+  try {
+    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
+    // setUrl(urldata.data);
 
-
-
-
-
-  };
-
-
-// const Ordersection=()=>{
-//   navigation('/Ordersection')
-// }
-
-  const allOrderFunc = async () => {
-    try {
-      await axios.post('http://127.0.0.1:8000/orders/OrderProduct/',{},{headers: { Authorization: `Bearer ${token}`}});
-      toast.success('Order placed!');
+    if (!urldata.data[0]?.nameofuser) {
+      toast.error('User address not received.');
+      toast.success('address section..')
+      navigation('/Userformaddress')
+    } else {
+      toast.success('order section...')
       navigation('/Ordersection')
-      toast.success('Order section!')
-    }catch(e){
-      toast.error('Cart is empty!');
-      console.error('Order error:', e.message);
-}};
-let Ordersectionfunc=()=>{
-   navigation('/Ordersection')
-   toast.success('order section')
-}
+    }
+  } catch (e) {
+    toast.error('Cart is empty!');
+    console.log('Error:', e);
+  }
+};
+
+
+
+
+
+
+
+
+// let Ordersectionfunc=()=>{
+  
+//    navigation('/Ordersection')
+//    toast.success('order section')
+// }
   const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const offerPrice = cartItems.reduce((acc, item) => acc + item.product.offer_price * item.quantity, 0);
@@ -117,7 +133,7 @@ let Ordersectionfunc=()=>{
       ) : (
         <div className="bg-amber-600 w-full h-screen flex justify-center items-center">
           <h1 className="text-6xl text-amber-50">Your cart is empty</h1>
-           <button onClick={Ordersectionfunc}className="w-full md:w-auto bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition">Orders all</button>
+           <button onClick={allOrderFunc}className="w-full md:w-auto bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition">Orders all</button>
         </div>
       )}
        <Toaster position='bottom-right'  />

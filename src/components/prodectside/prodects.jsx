@@ -1,5 +1,6 @@
 import { useEffect, useState,useContext } from "react";
 import axios from "axios";
+import toast,{Toaster} from "react-hot-toast";
 import MyContext from './createcontext'
 import bgimage from '../../assets/backgroundImage.jpg'
 import { useNavigate } from "react-router-dom";
@@ -39,9 +40,11 @@ const fetchData = async (cetagary) => {
 
 
 const CartSection=() => {
+   toast.success('cart section')
    navigation('/cartsection')
   };
 const Wishlistsection=()=>{
+  toast.success('wishlist section')
   navigation('/wishlistsection')
 }  
 let filterdata=products.filter((index)=>{
@@ -61,6 +64,7 @@ try{
     }
   })
   console.log('seccessfully......',addcartvalue)
+  toast.success('you have added the pordect to cart')
 }catch(e){
 console.log(`you got the error ....${addcartvalue}`,e.message)
 }finally{
@@ -74,6 +78,7 @@ let url=await axios.post('http://127.0.0.1:8000/cart/AddProductWishlist/',{produ
       Authorization:`Bearer ${token}`
     }
 })
+toast.success("you have add the prodect to cart")
 }catch(e){
   console.log('you got errror',e.message)
 }  
@@ -84,14 +89,14 @@ let url=await axios.post('http://127.0.0.1:8000/cart/AddProductWishlist/',{produ
       <nav className=" bg-amber-400 w-full flex flex-col md:flex-row items-center justify-between px-4 py-3 shadow sticky top-0 z-50 gap-3" >
         <div className="flex items-center gap-2 text-xl font-bold text-orange-500-600">🍽️ FoodieZone</div>
 
-         <div className="overflow-x-auto   rounded-2xl backdrop-blur-lg	 w-full md:w-auto  flex gap-4 text-sm font-semibold whitespace-nowrap ">
-          <button onClick={()=>fetchData('main dish')} className="rounded-2xl border-2 text-cyan-50  relative group  font-semibold px-3 py-2">Main Dish<span className="rounded-2xl absolute bottom-0 left-0 h-full w-0 bg-blue-500 transition-all duration-300 group-hover:w-full"></span></button>
-          <button onClick={()=>fetchData('rice dishes')} className="rounded-2xl border-2 text-cyan-50 relative group  font-semibold px-3 py-2">Rice Dishes<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"></span></button>
-          <button onClick={()=>fetchData('Street Food')} className="rounded-2xl border-2 relative group text-cyan-50 font-semibold px-3 py-2">Street Food<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"></span></button>
-          <button onClick={()=>fetchData('Noodles')} className="rounded-2xl border-2 relative group text-cyan-50 font-semibold px-3 py-2">Noodles<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"></span></button>
-          <button onClick={()=>fetchData('Pasta')} className="rounded-2xl border-2 relative group text-cyan-50 font-semibold px-3 py-2">Pasta<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"></span></button>
-          <button onClick={()=>fetchData('Desserts')} className="rounded-2xl border-2 relative group text-cyan-50 font-semibold px-3 py-2">Desserts<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"></span></button>
-          <button onClick={()=>fetchData('Breakfast')} className="rounded-2xl border-2 relative group text-cyan-50 font-semibold px-3 py-2">Breakfast<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"></span></button>
+         <div className="overflow-x-auto   rounded backdrop-blur-lg	 w-full md:w-auto  flex gap-4 text-sm font-semibold whitespace-nowrap ">
+          <button onClick={()=>fetchData('main dish')} className=" border-2 text-cyan-50  relative group  font-semibold px-3 py-2">Main Dish<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
+          <button onClick={()=>fetchData('rice dishes')} className=" border-2 text-cyan-50 relative group  font-semibold px-3 py-2">Rice Dishes<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
+          <button onClick={()=>fetchData('Street Food')} className=" border-2 relative group text-cyan-50 font-semibold px-3 py-2">Street Food<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
+          <button onClick={()=>fetchData('Noodles')} className=" border-2 relative group text-cyan-50 font-semibold px-3 py-2">Noodles<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
+          <button onClick={()=>fetchData('Pasta')} className=" border-2 relative group text-cyan-50 font-semibold px-3 py-2">Pasta<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
+          <button onClick={()=>fetchData('Desserts')} className=" border-2 relative group text-cyan-50 font-semibold px-3 py-2">Desserts<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
+          <button onClick={()=>fetchData('Breakfast')} className=" border-2 relative group text-cyan-50 font-semibold px-3 py-2">Breakfast<span className="absolute bottom-0 left-0 h-[2px] w-0 bg-red-500 transition-all duration-1000 group-hover:w-full"></span></button>
 
         </div>
 
@@ -100,7 +105,7 @@ let url=await axios.post('http://127.0.0.1:8000/cart/AddProductWishlist/',{produ
           <input onChange={(e)=>setSerch(e.target.value)}  type="text" placeholder="Search food..." className="px-3 py-1 w-full md:w-auto border rounded-md text-sm border-white "/>
           {/* <button onClick={serchProdect}>submit</button> */}
           <button onClick={Wishlistsection} className="relative text-red-600 border-2 rounded-2xl p-2 ">wishlist</button>
-          <button onClick={CartSection}  className="relative text-green-600 border-2 rounded-2xl p-2"> addcard</button>
+          <button onClick={CartSection}  className="relative text-green-600 border-2 rounded-2xl p-2"> Card</button>
         
           {/* </form>  */}
         </div>
@@ -127,6 +132,7 @@ let url=await axios.post('http://127.0.0.1:8000/cart/AddProductWishlist/',{produ
             </div>
           ))}
         </div>
+        <Toaster  position="bottom-right"/>
       </div>
     ):(<div style={{backgroundImage:`url(${bgimage})`}} className="bg-center bg-cover h-full bg-no-repeat p-6 bg-gray-100 min-h-screen">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">All Products</h2>
@@ -152,6 +158,7 @@ let url=await axios.post('http://127.0.0.1:8000/cart/AddProductWishlist/',{produ
         </div>
       </div>
       )}
+      <Toaster position="bottom-right"/>
     </div>
   );
 }

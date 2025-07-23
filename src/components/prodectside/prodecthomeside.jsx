@@ -14,7 +14,7 @@ let[serch,setSerch]=useState('')
     // toast('login seccsses')
     const fetchData = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/products/Viewallproduct/",{
+        let response = await axios.get("http://127.0.0.1:8000/products/ViewProductsByCategory/main dish/",{
           headers:{
             Authorization:`Bearer ${token}`
           }

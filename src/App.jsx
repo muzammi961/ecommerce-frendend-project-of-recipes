@@ -12,6 +12,7 @@ import Prodectdata from './components/prodectside/prodects'
 import Cartsection from './components/cart/cartsection'
 import Wishlist from './components/wishlist/wishlistsection'
 import Ordersection from './components/order/ordersection'
+import Userformaddress from './components/order/usrformaddress'
 function App() {
   const [values, setValue] = useState('')
 
@@ -28,6 +29,7 @@ function App() {
   <Route path='cartsection/' element={<Cartsection/>}/>
   <Route path='wishlistsection/' element={<Wishlist/>}/>
   <Route path='Ordersection/' element={<Ordersection/>}/>
+  <Route path='Userformaddress/' element={<Userformaddress/>}/>
 
 </Routes>
 </MYcontext.Provider>

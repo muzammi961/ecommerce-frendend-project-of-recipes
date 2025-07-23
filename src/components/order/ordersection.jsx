@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import bgimage from '../../assets/backgroundImage.jpg' 
+import { useNavigate } from "react-router-dom";
 function Ordersection(){
+let navigation=useNavigate()  
 let [orderproduct,setProduct]=useState([])
 useEffect(()=>{
 let OrderProductfunc=async()=>{
@@ -21,6 +23,10 @@ OrderProductfunc()
 },[])
 
 console.log('OrderProductfunc',orderproduct)
+
+let OrderformCheck=()=>{
+navigation('/Userformaddress')
+}
 
 
 
@@ -63,7 +69,7 @@ console.log('count is ,,,',totalprice)
       </div>
     </div>
 
-    <button class="mt-6 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Place Order</button>
+    <button onClick={OrderformCheck} class="mt-6 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Place Order</button>
    
   </div>
   
