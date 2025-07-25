@@ -19,17 +19,27 @@ try{
   
   localStorage.setItem('access',validateddata.data.access)
   localStorage.setItem('refresh',validateddata.data.refresh)
+  let userforcheck=validateddata.data
+  if(userforcheck.is_superuser){
+    navigation('/AdminsideRout')
+    toast.success('admin side')
+  }else{
+   navigation("/prodecthomeside")
    toast.success('enter inside the home page')
-  navigation("/prodecthomeside")
+  }
 }catch(error){
    if (error.response && error.response.data && error.response.data.message) {
-      toast.error(error.response.data.message); // Backend message
+      toast.error(error.response.data.message);
     } else {
       toast.error("Something went wrong!",{
 
       });
     }
 }
+// function forgetfunc(){
+// // navigation('')
+// }
+
 
 }
 let[state,dispatch]=useReducer(reducer,{username:'',email:'',password:''})
@@ -43,6 +53,7 @@ let[state,dispatch]=useReducer(reducer,{username:'',email:'',password:''})
             <input onChange={(e)=>dispatch({name:'email',value:e.target.value})} type="email" placeholder="Enter your email :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
             <input onChange={(e)=>dispatch({name:'password',value:e.target.value})} type="password" placeholder="Confirm your password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
             <button className='rounded px-4 py-2 bg-black hover:bg-blue-600 text-white' type="submit">Login</button>
+            {/* <button onClick={forgetfunc} className='rounded px-4 py-2 backdrop-blur-3xl hover:bg-black/40'>Forget</button> */}
           </form>
         </div>
 

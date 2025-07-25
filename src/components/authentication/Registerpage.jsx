@@ -91,7 +91,6 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
 
             <div  className="text-white flex justify-around ">
               <button className='rounded px-4 py-2 backdrop-blur-3xl  hover:bg-black/40' type="submit">Submit</button>
-              <button className='rounded px-4 py-2 backdrop-blur-3xl hover:bg-black/40'>Forget</button>
             </div>
           </form>
         </div>
