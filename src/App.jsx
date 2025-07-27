@@ -19,7 +19,10 @@ import ForgetPassword from './components/authentication/forgetpassworksection'
 import AddProduct from './components/adminside/productside/addproduct'
 import Seeproducts from './components/adminside/productside/seeproduct'
 import ViewallUser from './components/adminside/userside/viewalluser'
-import ViewallProudctByCategary from './components/adminside/productside/viewallproductbycategary'
+import ViewallProudctByCategary from './components/adminside/productside/adminviewallproductbycategary'
+import UpdateProducts from './components/adminside/productside/adminupdateproduct'
+import ViewallCategary from './components/adminside/categaryside/viewallcategary'
+import OrderOneProduct from './components/order/orderoneproduct'
 function App() {
   const [values, setValue] = useState('')
 
@@ -36,9 +39,10 @@ function App() {
   <Route path='cartsection/' element={<Cartsection/>}/>
   <Route path='wishlistsection/' element={<Wishlist/>}/>
   <Route path='Ordersection/' element={<Ordersection/>}/>
-  <Route path='Userformaddress/' element={<Userformaddress/>}/>
+  <Route path='Userformaddress/:cartid' element={<Userformaddress/>}/>
   <Route path='LogoutSide/' element={<LogoutSide/>}/>
   <Route path='ForgetPassword/'element={<ForgetPassword/>}/>
+  <Route path='OrderOneProduct/:cartid' element={<OrderOneProduct/>}/>
   
 
 {/* <Route path='Sample/' element={<Sample/>}/> */}
@@ -49,6 +53,8 @@ function App() {
   <Route path='AdminsideSeeproducts/' element={<Seeproducts/>}/>
   <Route path='AdminsideViewallUser/'element={<ViewallUser/>}/>
   <Route path='ViewallProudctByCategary/' element={<ViewallProudctByCategary/>}/>
+  <Route path='AdminUpdateProducts/:update_id' element={<UpdateProducts/>}/>
+  <Route path='AdminViewallCategary/' element={<ViewallCategary/>}/>
 
 </Routes>
 </MYcontext.Provider>

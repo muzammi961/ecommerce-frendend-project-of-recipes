@@ -16,7 +16,6 @@ let  subfunc= async(e)=>{
   e.preventDefault()
 try{
   let validateddata =await axios.post('http://127.0.0.1:8000/authentication/UserLogin/',state)
-  
   localStorage.setItem('access',validateddata.data.access)
   localStorage.setItem('refresh',validateddata.data.refresh)
   let userforcheck=validateddata.data
@@ -36,12 +35,12 @@ try{
       });
     }
 }
-// function forgetfunc(){
-// // navigation('')
-// }
-
-
 }
+
+function forgetfunc(){
+navigation('/ForgetPassword')
+}
+
 let[state,dispatch]=useReducer(reducer,{username:'',email:'',password:''})
     return (
    <div className="w-full h-[100vh] flex items-center justify-center md:h-screen overflow-hidden bgimage bg-cover bg-center bg-no-repeat">
@@ -52,8 +51,11 @@ let[state,dispatch]=useReducer(reducer,{username:'',email:'',password:''})
             <input  onChange={(e)=>dispatch({name:'username',value:e.target.value})} type="text" placeholder="Enter your name :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
             <input onChange={(e)=>dispatch({name:'email',value:e.target.value})} type="email" placeholder="Enter your email :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
             <input onChange={(e)=>dispatch({name:'password',value:e.target.value})} type="password" placeholder="Confirm your password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
-            <button className='rounded px-4 py-2 bg-black hover:bg-blue-600 text-white' type="submit">Login</button>
-            {/* <button onClick={forgetfunc} className='rounded px-4 py-2 backdrop-blur-3xl hover:bg-black/40'>Forget</button> */}
+            <div className='flex justify-between'>
+             <button className='rounded px-4 py-2 bg-black hover:bg-blue-600 text-white' type="submit">Login</button>
+            <button onClick={forgetfunc} className='rounded px-4 py-2 backdrop-blur-3xl hover:bg-black/40 text-amber-50'>Forget</button>
+            </div>
+            
           </form>
         </div>
 

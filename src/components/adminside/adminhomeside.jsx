@@ -6,23 +6,18 @@ import { useNavigate } from 'react-router-dom';
 function AdminHomeside() {
   const [showCategory, setShowCategory] = useState(false);
   const [showOrders, setShowOrders] = useState(false);
-  const categories = ['addthecategories', 'Apparel', 'Books'];
-  const products = ['addproduct', 'seeproduct', 'ViewallUser','ViewallProudctByCategary'];
+  const categories = ['AdminViewallCategary', 'Apparel', 'Books'];
+  const products = ['addproduct', 'seeproduct', 'ViewallUser','viewallproductbycategory'];
 let navigation=useNavigate()
 
 
 
 
   const handleCategoryClick = async(category) => {
-    if (category === 'addthecategories') {
-      alert('Loading addthecategories...');
+    if (category === 'AdminViewallCategary') {
+     navigation('/AdminViewallCategary')
     }
-
   };
-
-
-
-
   const handleProdectClick=(product)=>{
     console.log('product clicked',product)
     if(product==='addproduct'){
@@ -32,12 +27,10 @@ let navigation=useNavigate()
       navigation('/AdminsideSeeproducts')
     }else if(product==='ViewallUser'){
       navigation('/AdminsideViewallUser')
-    }else if(product==='ViewallProudctByCategary'){
+    }else if(product==='viewallproductbycategory'){
       navigation('/ViewallProudctByCategary')
     }
   }
-
-
 
   return (
     <div className="flex h-screen bg-gray-100 font-sans">
