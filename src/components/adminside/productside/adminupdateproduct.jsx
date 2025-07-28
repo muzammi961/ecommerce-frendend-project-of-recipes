@@ -1,150 +1,163 @@
 import axios from "axios";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function UpdateProducts(){
-const [categories, setCategories] = useState([]);    
-let {update_id}=useParams()
-let [productview,setProductview]=useState({})
-let [productdatas,setUpdateProduct]=useState({prname:'',prprice:'',profferprice:'',primage:''})
+function UpdateProducts() {
+  const [categories, setCategories] = useState([]);
+  const { update_id } = useParams();
+  const [productdatas, setUpdateProduct] = useState({
+    productname: '',
+    price: '',
+    offer_price: '',
+    item_photo: null,
+    category_id: '',
+  });
 
-useEffect(()=>{
-specficproduct()
-fetchCategories()
-},[]);
+  useEffect(() => {
+    fetchProduct();
+    fetchCategories();
+  }, []);
 
-
-const fetchCategories = async () => {
+  const fetchCategories = async () => {
     try {
       const token = localStorage.getItem("access");
-      const categories= await axios.get("http://127.0.0.1:8000/adminside/GetallCategory/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const res = await axios.get("http://127.0.0.1:8000/adminside/GetallCategory/", {
+        headers: { Authorization: `Bearer ${token}` }
       });
-      console.log(categories.data)
-      setCategories(categories.data);
+      setCategories(res.data);
     } catch (e) {
       console.error("Error fetching categories:", e);
     }
   };
 
-
-let specficproduct=async()=>{
-    try{  
-    const token=localStorage.getItem("access")
-     let sp_product = await axios.get(`http://127.0.0.1:8000/adminside/GetSpecificProduct/${update_id}/`, {
-        headers:{
-            Authorization:`Bearer ${token}`,
-        }
-     });   
-     console.log('products ',sp_product.data)
-     setProductview(sp_product.data)
-    }catch(e){
-        console.log('data does not exixted ....')
-    }
-};
-
-
-let updateproductsfunc=async()=>{
-    let token=localStorage.getItem('access')
-    try{
-      let product=await axios.put(`http://127.0.0.1:8000/adminside/UpdateProductView/${update_id}/`,{productdatas},{
-          headers:{
-            Authorization:`Bearer ${token}`,
-        },
-    })
-   }catch(e){
-    console.log('the data does not existed ....')
-   }
-}
-
-console.log('new data .....',productdatas.prname)
-// console.log('datass ...',productview.productname)
-
-  const handleCategoryChange = (e) => {
-    const value = e.target.value;
-    setSelectedCategory(value);
-    if (value !== "") {
-      fetchProducts(value);
-    } else {
-      setProducts([]);
+  const fetchProduct = async () => {
+    try {
+      const token = localStorage.getItem("access");
+      const res = await axios.get(`http://127.0.0.1:8000/adminside/GetSpecificProduct/${update_id}/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setUpdateProduct({
+        productname: res.data.productname,
+        price: res.data.price,
+        offer_price: res.data.offer_price,
+        category_id: res.data.category_id,
+        item_photo: null,
+      });
+    } catch (e) {
+      console.log("Product data does not exist.");
     }
   };
 
+const updateProduct = async (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem("access");
+  const formData = new FormData();
 
-console.log('update id ..',update_id)
-    return(
-   <div className="min-h-screen bg-black from-gray-50 to-gray-200 p-6">
-    <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-lg p-8 transition-all duration-300 hover:shadow-2xl">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-600 animate-pulse">Update Product</h2>
-      <form className="space-y-6 animate-fade-in-up">
-     
-        <div className="transition-all duration-300 hover:scale-[1.01]">
-          <label className="block text-gray-700 font-semibold mb-2"> Product Name </label>
-          <input type="text"   placeholder={productview.productname} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"/>
-        </div>
+  formData.append("productname", productdatas.productname);
+  formData.append("price", productdatas.price);
+  formData.append("offer_price", productdatas.offer_price);
+  formData.append("category_id", productdatas.category_id);
 
-        <div className="transition-all duration-300 hover:scale-[1.01]">
-          <label className="block text-gray-700 font-semibold mb-2">Category</label>
-          <select onChange={handleCategoryChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-            <option value="">Select a category</option>
-           {categories.map((category)=>(<option className="bg-black text-amber-50" key={category.id} value={category.name}>{category.name}</option>))}
-          </select>
-        </div>
+  // Always include the photo (even if not changed, send existing one from backend)
+  if (productdatas.item_photo) {
+    formData.append("item_photo", productdatas.item_photo);
+  } else {
+    // Optional: if backend expects an image always, you may need to re-fetch it or notify backend
+    // Some backends break if file field is missing in PUT
+  }
 
-        <div className="transition-all duration-300 hover:scale-[1.01]">
-          <label className="block text-gray-700 font-semibold mb-2">Price</label>
-          <div className="relative">
-            <span className="absolute left-3 top-2 text-gray-500">₹</span>
-            <input type="number" className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"placeholder={productview.price} />
+  try {
+    await axios.put(
+      `http://127.0.0.1:8000/adminside/UpdateProductView/${update_id}/`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // Required for FormData + PUT
+        },
+      }
+    );
+    alert("Product updated successfully!");
+  } catch (e) {
+    console.log("Error updating product:", e.response?.data || e);
+  }
+};
+
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-lg p-8">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Update Product</h2>
+        <form onSubmit={updateProduct} className="space-y-6">
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">Product Name</label>
+            <input
+              type="text"
+              value={productdatas.productname}
+              onChange={(e) => setUpdateProduct({ ...productdatas, productname: e.target.value })}
+              required
+              className="w-full px-4 py-2 border rounded-lg"
+            />
           </div>
-        </div>
-        <div className="transition-all duration-300 hover:scale-[1.01]">
-          <label className="block text-gray-700 font-semibold mb-2">Offer Price</label>
-          <input type="number" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder={productview.offer_price}/>
-        </div>
 
-        <div className="transition-all duration-300 hover:scale-[1.01]">
-          <label className="block text-gray-700 font-semibold mb-2">Product Image </label>
-          <div className="flex items-center justify-center w-full">
-            <label className="flex flex-col w-full border-2 border-dashed border-blue-300 hover:border-blue-500 rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-50">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  className="w-8 h-8 mb-4 text-blue-500"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16 16v6M8 16v6m8-6H8m8-4a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-                <p className="mb-2 text-sm text-gray-500">
-                  <span className="font-semibold">Click to upload</span> or drag and drop
-                </p>
-                <p className="text-xs text-gray-500">
-                  PNG, JPG, GIF (MAX. 800x400px)
-                </p>
-              </div>
-              <input type="file" className="hidden" />
-            </label>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">Category</label>
+            <select
+              value={productdatas.category_id}
+              onChange={(e) => setUpdateProduct({ ...productdatas, category_id: e.target.value })}
+              required
+              className="w-full px-4 py-2 border rounded-lg"
+            >
+              <option value="">Select a category</option>
+              {categories.map((cat) => (
+                <option required key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
+            </select>
           </div>
-        </div>
 
-        {/* Submit Button */}
-        <div className="pt-4">
-          <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Update Product</button>
-        </div>
-      </form>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">Price</label>
+            <input
+              type="number"
+              value={productdatas.price}
+              onChange={(e) => setUpdateProduct({ ...productdatas, price: e.target.value })}
+              required
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">Offer Price</label>
+            <input
+            required
+              type="number"
+              value={productdatas.offer_price}
+              onChange={(e) => setUpdateProduct({ ...productdatas, offer_price: e.target.value })}
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">Product Image</label>
+            <input
+            required
+              type="file"
+              accept="image/*"
+              onChange={(e) => setUpdateProduct({ ...productdatas, item_photo: e.target.files[0] })}
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-all"
+          >
+            Update Product
+          </button>
+        </form>
+      </div>
     </div>
-</div>
-
-    )
+  );
 }
 
 export default UpdateProducts;

@@ -1,10 +1,12 @@
+import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function ForgetPassword() {
+  let navigation=useNavigate()
   const [step, setStep] = useState('request'); 
-  const [form, setForm] = useState({ email: '', otp: '', password: '' });
+  const [form, setForm] = useState({ email: '', otp: '', password: '' ,confirmpassword: ''});
   const otpRefs = useRef([]);
 
   const change = (e) =>setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -14,7 +16,7 @@ export default function ForgetPassword() {
       otpRefs.current[0]?.focus();
     }
   }, [step]);
-
+const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
   const handleOtpChange = (idx, val) => {
     const otpArr = form.otp.split('');
     otpArr[idx] = val.slice(-1);
@@ -25,79 +27,52 @@ export default function ForgetPassword() {
     }
   };
 
-  const subfunc = (e) => {
+  const subfunc = async(e) => {
     e.preventDefault();
-    // Placeholder actions
     if (step === 'request') {
-      toast.success('OTP sent to email.');
-      setStep('verify');
+      try{
+       console.log('email is....',form.email)                                                    
+      await axios.post('http://127.0.0.1:8000/authentication/PasswordResetRequest/',{ email: form.email })
+       toast.success('OTP sent to email.');
+       console.log('thiis is otp func')
+       setStep('verify');
+      }catch(e){
+        toast.error('Email not found or error sending OTP.');
+      }
     } else if (step === 'verify') {
+     try{
+      console.log('email and otp  ...',form.email,form.otp)
+      await axios.post('http://127.0.0.1:8000/authentication/OTPVerificationView/',{email:form.email,otp:form.otp})
+     }catch(e){
+      toast.error('error sending otp..')
+      setStep('verify')
+     }
       toast.success('OTP verified!');
+      console.log('this is chage password func')
       setStep('reset');
-    } else {
-      toast.success('Password reset successful!');
-      setStep('request');
-      setForm({ email: '', otp: '', password: '' });
+    } else if (step==='reset') {
+    try{
+      if(form.password!==form.confirmpassword){
+        toast.error('this bout password is not similar...!')
+        setStep('reset')
+        return
+      }       
+       if (!form.password || !strongPasswordRegex.test(form.password)) {
+       toast.error('Password must be 6+ characters, include upper/lowercase, number, and special character');
+       setStep('reset')
+       return
+      }          
+      await axios.post('http://127.0.0.1:8000/authentication/PasswordResetView/',{email:form.email,password:form.password,conform_password:form.confirmpassword})
+    toast.success('Password reset successful!');
+    navigation('/loginpage')
+    }catch(e){
+    toast.error('somthing went wrong.....')
+    setStep('reset')
+    }
     }
   };
 
-
-  
-
   return (
-    // <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-200 flex items-center justify-center p-4">
-    //   <div className="bg-white/90 backdrop-blur-md max-w-md w-full p-8 rounded-2xl shadow-lg transform transition hover:scale-102">
-    //     <h1 className="text-center text-2xl font-semibold text-gray-800 mb-6">
-    //       {step === 'request' && 'Forgot Password'}
-    //       {step === 'verify' && 'Verify OTP'}
-    //       {step === 'reset' && 'Reset Password'}
-    //     </h1>
-
-    //     <form onSubmit={subfunc} className="space-y-5">
-    //       {step === 'request' && (
-    //         <div className="relative">
-    //           <input name="email" type="email" value={form.email} onChange={change} required className="peer w-full px-3 py-2 border-b-2 border-gray-300 focus:border-blue-500 outline-none bg-transparent" placeholder=" "/>
-    //           <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm">Email Address </label>
-    //         </div>
-    //       )}
-
-    //       {step === 'verify' && (
-    //         <>
-    //           <p className="text-center text-gray-600">Enter the 6‑digit code sent to your email.</p>
-    //           <div className="flex justify-between space-x-2">
-    //             {Array.from({ length: 6 }).map((_, i) => (
-    //               <input key={i} type="text" maxLength="1" ref={(el) => (otpRefs.current[i] = el)} onChange={(e) => handleOtpChange(i, e.target.value)} className="w-12 h-12 text-center text-xl border-2 border-gray-300 rounded-md focus:border-blue-500 transition"/>))}
-    //           </div>
-    //         </>
-    //       )}
-
-    //       {step === 'reset' && (
-    //         <div className="relative">
-    //           <input
-    //             name="password"
-    //             type="password"
-    //             value={form.password}
-    //             onChange={change}
-    //             required
-    //             className="peer w-full px-3 py-2 border-b-2 border-gray-300 focus:border-green-500 outline-none bg-transparent"
-    //             placeholder=" "
-    //           />
-    //           <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm">
-    //             New Password
-    //           </label>
-    //         </div>
-    //       )}
-
-    //       <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-    //         {step === 'request' && 'Send OTP'}
-    //         {step === 'verify' && 'Verify OTP'}
-    //         {step === 'reset' && 'Reset Password'}
-    //       </button>
-    //     </form>
-    //   </div>
-
-    //   <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
-    // </div>
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 flex items-center justify-center p-4">
   <div className="bg-white/95 backdrop-blur-lg max-w-md w-full p-8 rounded-3xl shadow-2xl transform transition-all duration-300 hover:shadow-xl hover:scale-[1.01]">
     {/* Animated header with icon */}
@@ -130,9 +105,7 @@ export default function ForgetPassword() {
             <input 
               name="email" 
               type="email" 
-              value={form.email} 
-              onChange={change} 
-              required 
+              value={form.email} onChange={change} required 
               className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200" 
               placeholder=" "
             />
@@ -180,10 +153,10 @@ export default function ForgetPassword() {
             <div className="relative bg-white rounded-lg">
               <input
                 name="password"
-                type="password"
+                type="text"
                 value={form.password}
-                onChange={change}
                 required
+                onChange={change}
                 className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200"
                 placeholder=" "
               />
@@ -197,9 +170,11 @@ export default function ForgetPassword() {
             <div className="absolute -inset-0.5 bg-blue-300/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition"></div>
             <div className="relative bg-white rounded-lg">
               <input
-                name="confirmPassword"
-                type="password"
+                name="confirmpassword"
+                type="text"
                 required
+                value={form.confirmpassword}
+                onChange={change}
                 className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200"
                 placeholder=" "
               />
@@ -214,7 +189,7 @@ export default function ForgetPassword() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Password must be at least 8 characters
+              Password must be at least 6 characters
             </p>
           </div>
         </div>

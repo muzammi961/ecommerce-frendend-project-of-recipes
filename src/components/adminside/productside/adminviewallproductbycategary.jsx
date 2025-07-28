@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 function ViewallProductByCategory() {
@@ -9,7 +10,22 @@ function ViewallProductByCategory() {
 let navigation=useNavigate()
   useEffect(() => {
     fetchCategories();
+    fetchProducts()
   }, []);
+
+let deletproduct=async(id)=>{
+  let token=localStorage.getItem('access')
+  console.log(id)
+  try{
+  await axios.delete(`http://127.0.0.1:8000/adminside/DeleteaProduct/${id}/`,{
+   headers: {Authorization: `Bearer ${token}`,},})
+   toast.success('delete successfully....')
+   setProducts((prevProducts) => prevProducts.filter((item) => item.id !== id));
+  }catch(e){
+    toast.error('somthing went error....',e)
+  }
+};
+
 
   const fetchCategories = async () => {
     try {
@@ -101,14 +117,20 @@ let updatefunc=(update_id)=>{
                   <span className="line-through mx-2">₹{product.price}</span>
                   <span className="text-green-600 font-bold">₹{product.offer_price}</span>
                 </p>
-                <button onClick={()=>updatefunc(product.id)} className="mt-3 w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                <div className="flex justify-between gap-3">
+                   <button className=" w-full mt-3 px-4 py-2 bg-black text-amber-50 hover:bg-amber-300" onClick={(e)=>deletproduct(product.id)}>delete</button>
+                <button onClick={()=>updatefunc(product.id)} className="mt-3 w-full bg-black text-white px-4 py-2 rounded hover:bg-amber-500 transition">
                   Edit Product
                 </button>
+                 
+                </div>
+               
               </div>
             ))
           )}
         </div>
       </div>
+      <Toaster position="bottom-right"/>
     </div>
   );
 }

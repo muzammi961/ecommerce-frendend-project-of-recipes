@@ -18,11 +18,13 @@ import LogoutSide from './components/authentication/logoutside'
 import ForgetPassword from './components/authentication/forgetpassworksection'
 import AddProduct from './components/adminside/productside/addproduct'
 import Seeproducts from './components/adminside/productside/seeproduct'
-import ViewallUser from './components/adminside/userside/viewalluser'
+import ViewallUser from './components/adminside/useralldatas/viewalluser'
 import ViewallProudctByCategary from './components/adminside/productside/adminviewallproductbycategary'
 import UpdateProducts from './components/adminside/productside/adminupdateproduct'
 import ViewallCategary from './components/adminside/categaryside/viewallcategary'
 import OrderOneProduct from './components/order/orderoneproduct'
+import Userspecificdetails from './components/adminside/useralldatas/userSpecificdetails'
+
 function App() {
   const [values, setValue] = useState('')
 
@@ -55,7 +57,9 @@ function App() {
   <Route path='ViewallProudctByCategary/' element={<ViewallProudctByCategary/>}/>
   <Route path='AdminUpdateProducts/:update_id' element={<UpdateProducts/>}/>
   <Route path='AdminViewallCategary/' element={<ViewallCategary/>}/>
+  <Route path='Userspecificdetails/' element={<Userspecificdetails/>}/>
 
+  
 </Routes>
 </MYcontext.Provider>
       
