@@ -189,12 +189,11 @@ function Prodecthomepage() {
     };
     fetchData();
   }, [token]);
-
-  const oneByoneOrderFunc = async (cartid) => {
+                                                          // erro here 
+  const oneByoneOrderFunc = async (cartid) => {              
     try {
-      const urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet', 
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      let token=localStorage.getItem('access')
+      const urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet', { headers: { Authorization: `Bearer ${token}`}});
       if (!urldata.data[0]?.nameofuser) {
         toast.error('Please add your address first');
         navigate('/Userformaddress');

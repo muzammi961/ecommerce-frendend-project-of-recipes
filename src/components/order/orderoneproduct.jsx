@@ -289,6 +289,13 @@ function OrderOneProduct() {
     }
   };
 
+let paymentbutton=()=>{
+  navigation(`/PayProduct/${cartid}`)
+}
+
+
+
+
   return (
     <>
       {isViewMode ? (
@@ -389,7 +396,7 @@ function OrderOneProduct() {
                     <span className="text-green-600">₹{product?.offer_price || product?.price || "0"}</span>
                   </div>
                 </div>
-
+{/* 
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-amber-700 mb-2">Payment Method</label>
                   <select className="w-full p-3 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white">
@@ -398,9 +405,9 @@ function OrderOneProduct() {
                     <option>UPI</option>
                     <option>Credit/Debit Card</option>
                   </select>
-                </div>
+                </div> */}
 
-                <button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-lg font-bold hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg">
+                <button onClick={paymentbutton} className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-lg font-bold hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg">
                   Proceed to Pay
                 </button>
               </div>

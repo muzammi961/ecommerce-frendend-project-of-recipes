@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect,useState } from "react";
 import bgimage from '../../assets/backgroundImage.jpg' 
 import { useNavigate } from "react-router-dom";
+import toast,{ Toaster } from "react-hot-toast";
 function Ordersection(){
 let navigation=useNavigate()  
 let [orderproduct,setProduct]=useState([])
@@ -24,9 +25,36 @@ OrderProductfunc()
 
 console.log('OrderProductfunc',orderproduct)
 
-let OrderformCheck=()=>{
-navigation('/Userformaddress')
-}
+// let OrderformCheck=()=>{
+// navigation('/Userformaddress')
+// }
+
+
+
+
+const OrderformCheck = async () => {
+  try {
+    let token=localStorage.getItem('access')
+    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
+    if (!urldata.data[0]?.nameofuser) {
+       console.log('urls data sss.',urldata.data)
+      toast.error('User address not received.');
+      toast.success('address section..')
+      console.log('addressss')
+      navigation(`/Userformaddress/${0}`)
+    } else {
+      toast.success('order section...')
+      console.log('you clikedd')
+      navigation('/Ordersection')
+    }
+  } catch (e) {
+    toast.error('Cart is empty!');
+    console.log('Error:', e);
+  }
+};
+
+
+
 
 
 
@@ -74,6 +102,7 @@ console.log('count is ,,,',totalprice)
   </div>
   
 </div>
+<Toaster position="bottom-right"/>
 
 </div>)
 }

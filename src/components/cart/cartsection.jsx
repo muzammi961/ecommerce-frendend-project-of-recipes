@@ -84,10 +84,13 @@ try {
                                                         //  alllorderfunction
 const allOrderFunc = async () => {
   try {
+    let token=localStorage.getItem('access')
     let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
     if (!urldata.data[0]?.nameofuser) {
+       console.log('urls data sss.',urldata.data)
       toast.error('User address not received.');
       toast.success('address section..')
+      console.log('addressss')
       navigation(`/Userformaddress/${0}`)
     } else {
       toast.success('order section...')

@@ -335,6 +335,32 @@ function ProductData() {
   };
 const [selectedProduct, setSelectedProduct] = useState(null);
 
+
+
+
+let logoutfunc=()=>{
+navigate('/LogoutSide')
+}
+
+
+let changpasswordfunc=()=>{
+  navigate('/changepassword')
+}
+
+
+let orderdetailsfunc=()=>{
+  navigate('/OrderDetail')
+}
+
+
+
+
+
+
+
+
+const [showActions, setShowActions] = useState(false);
+
 return (
   <>
     {selectedProduct ? (
@@ -522,6 +548,46 @@ return (
                 0
               </span>
             </button>
+ {/* /////////////////////////////////// */}
+
+
+<div className="relative">
+  {/* Main Trigger Button - Compact Version */}
+  <button 
+    className="py-1 px-3 bg-gradient-to-r from-[#6e8efb] to-[#a777e3] text-white border-none rounded-md text-xs font-semibold cursor-pointer shadow-sm transition-all duration-200 relative overflow-hidden hover:shadow-md active:translate-y-0"
+    onClick={() => setShowActions(!showActions)}
+  >
+    {showActions ? 'Hide' : 'Actions'}
+    <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_45%,rgba(255,255,255,0.3)_48%,rgba(255,255,255,0)_50%,rgba(255,255,255,0)_100%)] rotate-[30deg] animate-[shine_3s_infinite_linear]"></span>
+  </button>
+  
+  {/* Dropdown Menu - Absolute Positioning */}
+  {showActions && (
+    <div className="absolute right-0 z-20 w-[160px] flex flex-col gap-1 mt-1 animate-[fadeIn_0.2s_ease-out]">
+      <button onClick={changpasswordfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#d35400]">
+        Change Password
+      </button>
+      <button onClick={logoutfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#c0392b]">
+        Logout
+      </button>
+      <button onClick={orderdetailsfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#16a085]">
+        Order Details
+      </button>
+    </div>
+  )}
+</div>
+
+
+
+
+
+
+
+
+
+
+{/* ///////////////////////////////////////// */}
+
           </div>
         </div>
       </nav>

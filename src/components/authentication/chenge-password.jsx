@@ -2,10 +2,41 @@ import './style/registerpage.css'
 import hotellogo from '../../assets/hotellogo.jpg'
 import { useRef } from 'react';
 import { useState } from 'react';
+import axios from 'axios';
+import toast,{Toaster} from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 function Chengepassword(){
-// let subfunc=()=>{
+  let [state,setData]=useState({currentpass:'',newpass:'',confirmpass:''})
+  let navigation=useNavigate()
+  
+const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+ let changepassFunc=async()=>{
+  let token=localStorage.getItem('access')
+  try{
+  if(state.newpass!==state.confirmpass){
+    toast.error('this bout password is not currect...')
+    console.log('not correct bout password...')
+  }
+  if (!state.newpass || !strongPasswordRegex.test(state.confirmpass)) {
+       toast.error('Password must be 6+ characters, include upper/lowercase, number, and special character');
+  }          
+   await axios.post('http://127.0.0.1:8000/authentication/ChangePasswordAPIView/',{old_password:state.currentpass,new_password:state.newpass},{
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+   });
+   toast.success('password changed..')
+   navigation('/prodectdata')
+  }catch(e){
+    toast.error('you got an error whene post the new password....',e)
+  }
+ } 
 
-// }
+
+
+
+
+
     return (
    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
   <div className="bg-white/90 backdrop-blur-lg max-w-md w-full rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:shadow-xl">
@@ -32,6 +63,7 @@ function Chengepassword(){
           <div className="absolute -inset-0.5 bg-blue-300/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <div className="relative bg-white rounded-lg">
             <input
+               onChange={(e) => setData({ ...state, currentpass: e.target.value })}
               type="password"
               className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200"
               placeholder=" "
@@ -47,6 +79,7 @@ function Chengepassword(){
           <div className="absolute -inset-0.5 bg-blue-300/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <div className="relative bg-white rounded-lg">
             <input
+              onChange={(e) => setData({ ...state, newpass: e.target.value })}
               type="password"
               className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200"
               placeholder=" "
@@ -62,6 +95,7 @@ function Chengepassword(){
           <div className="absolute -inset-0.5 bg-blue-300/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <div className="relative bg-white rounded-lg">
             <input
+              onChange={(e) => setData({ ...state, confirmpass: e.target.value })}
               type="password"
               className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200"
               placeholder=" "
@@ -86,7 +120,7 @@ function Chengepassword(){
             <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            Minimum 8 characters
+            Minimum 6 characters
           </li>
           <li className="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -105,6 +139,7 @@ function Chengepassword(){
 
       {/* Submit Button */}
       <button
+        onClick={changepassFunc}
         type="button"
         className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-blue-300/50 flex items-center justify-center"
       >
@@ -115,6 +150,7 @@ function Chengepassword(){
       </button>
     </div>
   </div>
+  <Toaster position='bottom-right'/>
 </div>
 
   );

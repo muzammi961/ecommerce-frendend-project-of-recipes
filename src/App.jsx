@@ -24,7 +24,16 @@ import UpdateProducts from './components/adminside/productside/adminupdateproduc
 import ViewallCategary from './components/adminside/categaryside/viewallcategary'
 import OrderOneProduct from './components/order/orderoneproduct'
 import Userspecificdetails from './components/adminside/useralldatas/userSpecificdetails'
+import PayProduct from './components/payment/payproduct'
+import RazorpayButton from './components/payment/razorpaysection'
+// import ActionMenu from './components/prodectside/sidebutton'
+import OrderDetail from './components/order/orderdetail'
 
+
+
+
+
+import AdminSidebar from './components/ad/sidebar'
 function App() {
   const [values, setValue] = useState('')
 
@@ -45,7 +54,11 @@ function App() {
   <Route path='LogoutSide/' element={<LogoutSide/>}/>
   <Route path='ForgetPassword/'element={<ForgetPassword/>}/>
   <Route path='OrderOneProduct/:cartid' element={<OrderOneProduct/>}/>
-  
+  {/* <Route path='ActionMenu/' element={<ActionMenu/>}/>  */}
+ <Route path='OrderDetail/' element={<OrderDetail/>}/>
+
+<Route path='PayProduct/:cartid'element={<PayProduct/>}/>
+<Route path='RazorpayButton/' element={<RazorpayButton/>}/>
 
 {/* <Route path='Sample/' element={<Sample/>}/> */}
 
@@ -59,7 +72,16 @@ function App() {
   <Route path='AdminViewallCategary/' element={<ViewallCategary/>}/>
   <Route path='Userspecificdetails/' element={<Userspecificdetails/>}/>
 
-  
+
+
+
+
+
+
+{/* <Route path='AdminDashboard/' element={<AdminDashboard/>}/> */}
+ {/* <Route path='DashboardContent/'  element={<DashboardContent/>}/> */}
+ <Route path='AdminSidebar/' element={<AdminSidebar/>}/>
+{/* <Route path='UserManagementCard/' element={<UserManagementCard/>}/> */}
 </Routes>
 </MYcontext.Provider>
       

@@ -23,6 +23,7 @@ try{
     navigation('/AdminsideRout')
     toast.success('admin side')
   }else{
+   console.log(state.password)
    navigation("/prodecthomeside")
    toast.success('enter inside the home page')
   }
