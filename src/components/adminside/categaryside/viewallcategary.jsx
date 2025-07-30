@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import AdminSidebar from '../../ad/sidebar'; // Adjust the import path as needed
-
+import { useNavigate } from "react-router-dom";
 function ViewallCategary() {
   const [categories, setCategories] = useState([]);
-
+  let navigaions=useNavigate()
   useEffect(() => {
     fetchAllCategaryFunc();
   }, []);
@@ -24,6 +24,47 @@ function ViewallCategary() {
       console.error('Error fetching categories:', e);
     }
   };
+
+let deleteCategary=async(id)=>{
+  let token=localStorage.getItem('access')
+  try{
+    await axios.delete(`http://127.0.0.1:8000/adminside/DeleteCategory/${id}/`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
+    setCategories((prev) => prev.filter((cat) => cat.id !== id));
+    toast.success('you could delete the categary...!')
+  }catch(e){
+    toast.error('you could not delete the categary...!')
+  }
+}
+
+// let updatecategary=async(id)=>{
+//   let token=localStorage.getItem('access')
+//   try{
+//     await axios.put(`http://127.0.0.1:8000/adminside/UpdateCategory/${id}/`,{
+//       headers:{
+//         Authorization:`Bearer ${token}`
+//       }
+//     })
+//     setCategories((prev) => prev.filter((cat) => cat.id !== id));
+//     toast.success('you could change the category.....!')
+//   }catch(e){
+//     toast.error('you could not change the category....!')
+//   }
+// }
+
+
+let updatenav=(catid)=>{
+  console.log('id is ',catid)
+ navigaions(`/UpdateCategory/${catid}`)
+}
+
+
+
+
+
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -57,17 +98,11 @@ function ViewallCategary() {
                 
                 <div className="flex justify-end space-x-2">
                   <button 
+                    
                     className="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors"
-                    onClick={() => {/* Edit functionality */}}
-                  >
-                    Edit
-                  </button>
+                    onClick={(e)=>updatenav(cat.id)}>Edit</button>
                   <button 
-                    className="px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                    onClick={() => {/* Delete functionality */}}
-                  >
-                    Delete
-                  </button>
+                    className="px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors" onClick={(e)=>deleteCategary(cat.id)}>Delete</button>
                 </div>
               </div>
             ))}

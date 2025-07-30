@@ -23,15 +23,17 @@ import ViewallProudctByCategary from './components/adminside/productside/adminvi
 import UpdateProducts from './components/adminside/productside/adminupdateproduct'
 import ViewallCategary from './components/adminside/categaryside/viewallcategary'
 import OrderOneProduct from './components/order/orderoneproduct'
-import Userspecificdetails from './components/adminside/useralldatas/userSpecificdetails'
+import OrderDetailsAdmin from './components/adminside/useralldatas/userSpecificdetails'
 import PayProduct from './components/payment/payproduct'
 import RazorpayButton from './components/payment/razorpaysection'
 // import ActionMenu from './components/prodectside/sidebutton'
 import OrderDetail from './components/order/orderdetail'
+import Addcategary from './components/adminside/categaryside/addcategary'
 
 
+import UpdateCategory from './components/adminside/categaryside/updatecategary'
 
-
+import UpdateUserData from './components/adminside/useralldatas/updateuserdata'
 
 import AdminSidebar from './components/ad/sidebar'
 function App() {
@@ -70,8 +72,10 @@ function App() {
   <Route path='ViewallProudctByCategary/' element={<ViewallProudctByCategary/>}/>
   <Route path='AdminUpdateProducts/:update_id' element={<UpdateProducts/>}/>
   <Route path='AdminViewallCategary/' element={<ViewallCategary/>}/>
-  <Route path='Userspecificdetails/' element={<Userspecificdetails/>}/>
-
+  <Route path='OrderDetailsAdmin/' element={<OrderDetailsAdmin/>}/>
+  <Route path='AdminAddcategary/' element={<Addcategary/>}/>
+  <Route path='UpdateCategory/:catid' element={<UpdateCategory/>}/>
+  <Route path='UpdateUserData/:userid' element={<UpdateUserData/>}/>
 
 
 
