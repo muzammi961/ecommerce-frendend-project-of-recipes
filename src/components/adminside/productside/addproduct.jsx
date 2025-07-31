@@ -84,14 +84,13 @@ export default function AddProduct() {
                   />
                 </div>
 
-                {/* Category */}
+          
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">Category</label>
                   <select
                     value={form.category_id}
                     onChange={(e) => setForm({...form, category_id: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm"
-                  >
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm">
                     <option value="">Select a category</option>
                     {allcategary.map(category => (
                       <option key={category.id} value={category.id}>{category.name}</option>
@@ -99,7 +98,7 @@ export default function AddProduct() {
                   </select>
                 </div>
 
-                {/* Price */}
+       
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">Price ($)</label>
                   <input

@@ -232,11 +232,14 @@ function OrderOneProduct() {
   const token = localStorage.getItem("access");
   const handleToggle = () => setIsViewMode(!isViewMode);
 
-  useEffect(() => {
-    console.log("Cart ID from URL:", cartid);
+useEffect(() => {
+  console.log("Cart ID from URL:", cartid);
+  if (cartid !== "0") {
     getAddress();
     getProductDetails(cartid);
-  }, [cartid]);
+  }
+}, [cartid]);
+
 
   const getAddress = async () => {
     try {
@@ -251,8 +254,7 @@ function OrderOneProduct() {
 
   const getProductDetails = async (id) => {
     try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/products/ViewSpecificProduct/${id}/`,
+        const response = await axios.get(`http://127.0.0.1:8000/products/ViewSpecificProduct/${id}/`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -310,10 +312,11 @@ let paymentbutton=()=>{
               <div className="flex flex-col md:flex-row items-start gap-6 pb-6 mb-6 border-b border-amber-100">
                 <div className="relative">
                   <img
-                    src={`http://127.0.0.1:8000${product?.item_photo || ""}`}
-                    alt={product?.productname}
-                    className="w-32 h-32 object-cover rounded-xl border-2 border-white shadow-lg"
-                  />
+                     src={cartid !== "0" ? `http://127.0.0.1:8000${product?.item_photo || ""}` : ""}
+                    alt={product?.productname || "No Product"}
+                     className="w-32 h-32 object-cover rounded-xl border-2 border-white shadow-lg"
+                    />
+
                   <div className="absolute -top-2 -right-2 bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow-md">
                     1
                   </div>
@@ -321,7 +324,7 @@ let paymentbutton=()=>{
 
                 <div className="flex-1">
                   <h2 className="text-xl font-bold text-gray-800">
-                    {product?.productname || "Loading..."}
+                   {cartid !== "0" ? product?.productname : "No product selected"}
                   </h2>
                   <p className="text-sm text-amber-600 mb-3">
                     {product?.category || "N/A"}
@@ -338,7 +341,7 @@ let paymentbutton=()=>{
 
                   <div className="mt-4">
                     <p className="text-xl font-bold text-green-600">
-                      ₹{product?.offer_price || product?.price || "0"}
+                       ₹{cartid !== "0" ? (product?.offer_price || product?.price || "0") : "0"}
                     </p>
                   </div>
                 </div>
@@ -396,16 +399,6 @@ let paymentbutton=()=>{
                     <span className="text-green-600">₹{product?.offer_price || product?.price || "0"}</span>
                   </div>
                 </div>
-{/* 
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-amber-700 mb-2">Payment Method</label>
-                  <select className="w-full p-3 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white">
-                    <option>Choose Payment Method</option>
-                    <option>Cash on Delivery</option>
-                    <option>UPI</option>
-                    <option>Credit/Debit Card</option>
-                  </select>
-                </div> */}
 
                 <button onClick={paymentbutton} className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-lg font-bold hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg">
                   Proceed to Pay

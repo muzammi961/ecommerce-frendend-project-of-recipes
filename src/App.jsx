@@ -72,7 +72,7 @@ function App() {
   <Route path='ViewallProudctByCategary/' element={<ViewallProudctByCategary/>}/>
   <Route path='AdminUpdateProducts/:update_id' element={<UpdateProducts/>}/>
   <Route path='AdminViewallCategary/' element={<ViewallCategary/>}/>
-  <Route path='OrderDetailsAdmin/' element={<OrderDetailsAdmin/>}/>
+  <Route path='OrderDetailsAdmin/:userid' element={<OrderDetailsAdmin/>}/>
   <Route path='AdminAddcategary/' element={<Addcategary/>}/>
   <Route path='UpdateCategory/:catid' element={<UpdateCategory/>}/>
   <Route path='UpdateUserData/:userid' element={<UpdateUserData/>}/>

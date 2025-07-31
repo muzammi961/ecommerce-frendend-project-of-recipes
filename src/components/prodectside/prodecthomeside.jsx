@@ -190,15 +190,51 @@ function Prodecthomepage() {
     fetchData();
   }, [token]);
                                                           // erro here 
-  const oneByoneOrderFunc = async (cartid) => {              
+  const oneByoneOrderFunc = async (cartid) => {   
+    
+    alert(`this is the order id form the homside ${cartid}`)
+    console.log('this is the order id form homside .....',cartid)
     try {
       let token=localStorage.getItem('access')
       const urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet', { headers: { Authorization: `Bearer ${token}`}});
       if (!urldata.data[0]?.nameofuser) {
         toast.error('Please add your address first');
-        navigate('/Userformaddress');
+         
+
+       try {
+         const postValue = {
+              product: cartid,
+               quantity: 1,
+              };
+              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              toast.success("Added to cart!");
+            } catch (e) {
+              console.error("Error adding to cart:", e.message);
+              toast.error("Failed to add to cart");
+            }
+
+
+
+
+
+        navigate(`/Userformaddress/${cartid}`);
       } else {
-        navigate(`/OrderOneProduct/${cartid}`);
+        
+
+        try {
+         const postValue = {
+              product: cartid,
+               quantity: 1,
+              };
+              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              toast.success("Added to cart!");
+            } catch (e) {
+              console.error("Error adding to cart:", e.message);
+              toast.error("Failed to add to cart");
+            }
+            navigate(`/OrderOneProduct/${cartid}`)
+
+        // navigate(`/OrderOneProduct/${cartid}`);           this is navigate to order sction
       }
     } catch (e) {
       toast.error('Error processing your order');

@@ -200,7 +200,21 @@ function Wishlist() {
 
       if (!res.data[0]?.nameofuser) {
         toast.error('Please complete your address first.');
-        navigate('/Userformaddress');
+           try {
+         const postValue = {
+              product: cartId,
+               quantity: 1,
+              };
+              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              toast.success("Added to cart!");
+            } catch (e) {
+              console.error("Error adding to cart:", e.message);
+              toast.error("Failed to add to cart");
+            }
+        
+
+
+        navigate(`/Userformaddress/${cartId}`);
       } else {
         navigate(`/OrderOneProduct/${cartId}`);
       }

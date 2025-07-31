@@ -52,7 +52,8 @@ const ViewallUser = () => {
 
 
   
-let userdetailfunc=(id)=>{
+let userdetailfunc=(userid)=>{
+ navigation(`/OrderDetailsAdmin/${userid}`) 
  console.log(' view all          order section ......................................................  ')
 }
 

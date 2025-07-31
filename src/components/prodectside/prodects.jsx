@@ -227,27 +227,43 @@ function ProductData() {
   const [categoryName, setCategoryName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem("access");
-
+  let [categorydata,setCategorydata]=useState([])
 
 
 
 
   
 
+
+
   useEffect(() => {
     fetchData("main dish");
+    getcategoryfunc()
   }, []);
+
+
+let getcategoryfunc=async()=>{
+    try{
+      let token=localStorage.getItem('access')
+      let getcat=await axios.get('http://127.0.0.1:8000/products/GetallCategory/',{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      console.log('category ',getcat.data[0].name)
+      setCategorydata(getcat.data)
+    }catch(e){
+      console.log('category could not find....!')
+    }
+}
+
+
 
   const fetchData = async (category) => {
     setCategoryName(category);
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/products/ViewProductsByCategory/${category}/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.get(`http://127.0.0.1:8000/products/ViewProductsByCategory/${category}/`,{headers: {Authorization: `Bearer ${token}`,},
         }
       );
       setProducts(response.data);
@@ -274,7 +290,9 @@ function ProductData() {
   );
 
   const addToCart = async (productId) => {
-    console.log('addToCart',productId)
+  
+    // alert(`this is the product sction form the product section ${productId}`)
+    console.log('this is product id form the product section ',productId)
     try {
       const postValue = {
         product: productId,
@@ -315,6 +333,9 @@ function ProductData() {
   };
 
   const addOrder = async (productId) => {
+    alert(`this is the product sction form the product section ${productId}`)
+    console.log('this is product id form the product section ',productId)
+    let token=localStorage.getItem('access')
     try {
       const response = await axios.get(
         "http://127.0.0.1:8000/orders/UseraddressGet",
@@ -324,9 +345,35 @@ function ProductData() {
       );
       if (!response.data[0]?.nameofuser) {
         toast.error("Please add your address first");
+
+          try {
+         const postValue = {
+              product: productId,
+               quantity: 1,
+              };
+              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              toast.success("Added to cart!");
+            } catch (e) {
+              console.error("Error adding to cart:", e.message);
+              toast.error("Failed to add to cart");
+            }
+
+
         navigate(`/Userformaddress/${productId}`);
       } else {
-        navigate(`/OrderOneProduct/${productId}`);
+      try {
+      const postValue = {
+        product: productId,
+        quantity: 1,
+      };
+      await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+      toast.success("Added to cart!");
+    } catch (e) {
+      console.error("Error adding to cart:", e.message);
+      toast.error("Failed to add to cart");
+    }
+    navigate(`/OrderOneProduct/${productId}`)
+                                  //  navigate(`/OrderOneProduct/${productId}`);        this is navigate to order sction
       }
     } catch (e) {
       toast.error("Error processing your order");
@@ -454,27 +501,27 @@ return (
           </div>
 
           {/* Category Tabs - Scrollbar hidden */}
-          <div className="flex-1 overflow-x-auto no-scrollbar">
+          <div className="flex-1 overflow-x-auto whitespace-nowrap no-scrollbar">
             <div className="flex space-x-2 md:space-x-4">
-              {[
+              {/* {[
                 "main dish",
                 "rice dishes",
                 "Street Food",
                 "Noodles",
                 "Pasta",
                 "Desserts",
-                "Breakfast",
-              ].map((cat) => (
+                "Breakfast",] */}
+                {categorydata.map((cat) => (
                 <button
-                  key={cat}
-                  onClick={() => fetchData(cat)}
+                  key={cat.id}
+                  onClick={() => fetchData(cat.name)}
                   className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300 ${
-                    categoryName === cat
+                    categoryName === cat.name
                       ? "bg-white text-amber-600 shadow-md"
                       : "text-white hover:bg-amber-300 hover:text-white"
                   }`}
                 >
-                  {cat}
+                  {cat.name}
                 </button>
               ))}
             </div>
@@ -557,7 +604,7 @@ return (
     className="py-1 px-3 bg-gradient-to-r from-[#6e8efb] to-[#a777e3] text-white border-none rounded-md text-xs font-semibold cursor-pointer shadow-sm transition-all duration-200 relative overflow-hidden hover:shadow-md active:translate-y-0"
     onClick={() => setShowActions(!showActions)}
   >
-    {showActions ? 'Hide' : 'Actions'}
+    {showActions ? 'Hide Menu' : 'Account Menu'}
     <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_45%,rgba(255,255,255,0.3)_48%,rgba(255,255,255,0)_50%,rgba(255,255,255,0)_100%)] rotate-[30deg] animate-[shine_3s_infinite_linear]"></span>
   </button>
   

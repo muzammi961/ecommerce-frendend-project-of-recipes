@@ -1,8 +1,21 @@
 import React from 'react';
 import AdminSidebar from '../../ad/sidebar';
-
+import axios from 'axios';
+import toast,{Toaster} from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
+import { useEffect,useState,useReducer } from 'react';
 function OrderDetailsAdmin() {
-  // Sample order data
+  let [orderdata,setOrderdata]=useState([])
+  let [totalprice,setTotalprice]=useState('')
+  let [address,setAddress]=useState([])
+  let {userid}=useParams()
+
+// let usereducerfunc=()=>{
+
+// }
+
+
+//   let {userdb,useRed}=useReducer(usereducerfunc,{username:'',useremail:'',userphonenumber:'',userorderprice:''})
   const order = {
     id: 'ORD-789012',
     date: '2023-11-15 14:30',
@@ -34,6 +47,44 @@ function OrderDetailsAdmin() {
     }
   };
 
+  useEffect(() => {
+    userOrderDetails(userid);
+    userAddress(userid)
+  },[userid]);
+  const userOrderDetails = async (userid) => {
+    const token = localStorage.getItem('access');
+    console.log(token)
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/adminside/OrderDetailsBYuser/${userid}/`, {headers: {Authorization: `Bearer ${token}`}});
+      console.log(response.data[0].product.productname);
+      setOrderdata(response.data)
+      
+    } catch (e) {
+      console.log('Data fetch failed', e);
+    }
+  };
+
+
+  
+let userAddress=async()=>{
+    const token=localStorage.getItem('access')
+    try{
+      let addressdata=await axios.get(`http://127.0.0.1:8000/adminside/GetAddressBYUser/${userid}/`,{headers:{Authorization :`Bearer ${token}`}})
+      setAddress(addressdata.data)
+       toast.success('address got')
+    }catch(e){
+        console.log('error...')
+        toast.error('does not have address......')
+    }
+}
+
+
+
+
+
+
+
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       <AdminSidebar />
@@ -45,28 +96,20 @@ function OrderDetailsAdmin() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full transform -translate-x-16 translate-y-16"></div>
             <h1 className="text-3xl font-bold text-white relative z-10">Order Details</h1>
-            <p className="text-indigo-100 mt-2 relative z-10">Order #{order.id}</p>
+            <p className="text-indigo-100 mt-2 relative z-10">Order #order.id</p>
           </div>
 
-          {/* Order Summary Card */}
+          
           <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
             <div className="p-6">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div className="space-y-2">
                   <div className="flex items-center">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      order.status === 'Delivered' 
-                        ? 'bg-green-100 text-green-800' 
-                        : order.status === 'Shipped' 
-                          ? 'bg-blue-100 text-blue-800' 
-                          : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {order.status}
-                    </span>
-                    <span className="ml-4 text-gray-500">{order.date}</span>
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium`}></span>
+                    <span className="ml-4 text-gray-500">order.date</span>
                   </div>
-                  <h2 className="text-xl font-bold text-gray-800">Total: {order.total}</h2>
-                  <p className="text-gray-600">Payment Method: {order.paymentMethod}</p>
+                  <h2 className="text-xl font-bold text-gray-800">Total: order.total</h2>
+                  <p className="text-gray-600">Payment Method: Credit Card</p>
                 </div>
                 <button className="mt-4 md:mt-0 px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all duration-200">
                   Update Status
@@ -82,22 +125,22 @@ function OrderDetailsAdmin() {
                 <h3 className="font-semibold text-gray-800">Order Items</h3>
               </div>
               <div className="divide-y divide-gray-100">
-                {order.items.map(item => (
-                  <div key={item.id} className="p-4 flex items-center hover:bg-gray-50 transition-colors">
+                {orderdata.map(item => (
+                  <div className="p-4 flex items-center hover:bg-gray-50 transition-colors">
                     <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
                       <img 
-                        src={item.image} 
+                         src={`http://127.0.0.1:8000${item.product.item_photo}`} 
                         alt={item.name} 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="ml-4 flex-1">
-                      <h4 className="font-medium text-gray-800">{item.name}</h4>
+                      <h4 className="font-medium text-gray-800">{item.product.productname}</h4>
                       <p className="text-gray-600">Quantity: {item.quantity}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium text-gray-800">{item.price}</p>
-                      <p className="text-sm text-gray-500">${(parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2)}</p>
+                      <p className="font-medium text-gray-800">{item.product.offer_price}</p>
+                      {/* <p className="text-sm text-gray-500">${(parseFloat(item.product.price.replace('$', '')) * item.quantity).toFixed(2)}</p> */}
                     </div>
                   </div>
                 ))}
@@ -105,7 +148,7 @@ function OrderDetailsAdmin() {
               <div className="p-4 border-t border-gray-200 bg-gray-50">
                 <div className="flex justify-between items-center">
                   <span className="font-medium">Subtotal</span>
-                  <span className="font-medium">{order.total}</span>
+                  <span className="font-medium">{totalprice}</span>
                 </div>
               </div>
             </div>
@@ -131,44 +174,41 @@ function OrderDetailsAdmin() {
                 </div>
               </div>
 
-              {/* Shipping Address */}
+           
               <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-b border-gray-200">
                   <h3 className="font-semibold text-gray-800">Shipping Address</h3>
                 </div>
-                <div className="p-6">
-                  <div className="space-y-2">
-                    <p className="text-gray-800">{order.shippingAddress.street}</p>
-                    <p className="text-gray-800">{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zip}</p>
-                    <p className="text-gray-800">{order.shippingAddress.country}</p>
-                  </div>
-                </div>
+                {address.map(add=>(
+                <div className="p-6 bg-white rounded-md shadow-md w-full max-w-lg">
+                 <div className="space-y-3 text-gray-800 leading-relaxed">
+               <p><strong>Name:</strong> {add.nameofuser}</p>
+              <p><strong>Phone:</strong> {add.phonenumber}</p>
+             <p><strong>House / Building:</strong> {add.houseno_buildingname}</p>
+            <p><strong>Road Name:</strong> {add.Roadname}</p>
+           <p><strong>City:</strong> {add.city}</p>
+           <p><strong>State:</strong> {add.state}</p>
+          <p><strong>Pincode:</strong> {add.pincode}</p>
+          </div>
+         </div>
+
+                ))}
               </div>
 
-              {/* Billing Address */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-b border-gray-200">
-                  <h3 className="font-semibold text-gray-800">Billing Address</h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-2">
-                    <p className="text-gray-800">{order.billingAddress.street}</p>
-                    <p className="text-gray-800">{order.billingAddress.city}, {order.billingAddress.state} {order.billingAddress.zip}</p>
-                    <p className="text-gray-800">{order.billingAddress.country}</p>
-                  </div>
-                </div>
-              </div>
+    
             </div>
           </div>
 
-          {/* Back Button */}
+          {/* Back Button
           <div className="mt-8">
             <button className="px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all duration-200">
               Back to Orders
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
+      <Toaster position='bottom-right
+      '/>
     </div>
   );
 }

@@ -46,7 +46,8 @@ function Cartsection() {
 
                                                                     // orderonebyone
 const oneByoneOrderFunc = async (cartid) => {
-  console.log('categary number ...',cartid)
+  alert(`this is the cateid form cart section ${cartid}`)
+  console.log('this is the carteid from cart section ',cartid)
   const token = localStorage.getItem('access');
   // try {
   //   const response = await axios.post(`http://127.0.0.1:8000/orders/OrderOneProductView/${cartid}/`,{},{headers: {Authorization: `Bearer ${token}`}});
@@ -85,7 +86,7 @@ try {
 const allOrderFunc = async () => {
   try {
     let token=localStorage.getItem('access')
-    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet/',{ headers:{Authorization:`Bearer ${token}`}});
+    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
     if (!urldata.data[0]?.nameofuser) {
        console.log('urls data sss.',urldata.data)
       toast.error('User address not received.');
@@ -94,6 +95,7 @@ const allOrderFunc = async () => {
       navigation(`/Userformaddress/${0}`)
     } else {
       toast.success('order section...')
+    
       navigation('/Ordersection')
     }
   } catch (e) {

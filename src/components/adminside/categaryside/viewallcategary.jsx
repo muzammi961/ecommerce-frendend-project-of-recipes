@@ -40,22 +40,6 @@ let deleteCategary=async(id)=>{
   }
 }
 
-// let updatecategary=async(id)=>{
-//   let token=localStorage.getItem('access')
-//   try{
-//     await axios.put(`http://127.0.0.1:8000/adminside/UpdateCategory/${id}/`,{
-//       headers:{
-//         Authorization:`Bearer ${token}`
-//       }
-//     })
-//     setCategories((prev) => prev.filter((cat) => cat.id !== id));
-//     toast.success('you could change the category.....!')
-//   }catch(e){
-//     toast.error('you could not change the category....!')
-//   }
-// }
-
-
 let updatenav=(catid)=>{
   console.log('id is ',catid)
  navigaions(`/UpdateCategory/${catid}`)
