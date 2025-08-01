@@ -77,13 +77,6 @@ let backbuttonfunc=()=>{
                     </div>
                     
                     <div className="flex flex-col items-end">
-                      {/* <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        product.status === "Delivered" ? "bg-green-100 text-green-800" :
-                        product.status === "Shipped" ? "bg-blue-100 text-blue-800" :
-                        "bg-amber-100 text-amber-800"
-                      }`}>
-                        product.status
-                      </span> */}
                       <p className="text-sm text-gray-500 mt-1">{element.ordered_at}</p>
                     </div>
                   </div>
@@ -96,8 +89,8 @@ let backbuttonfunc=()=>{
                     </div>
                     
                     <div className="text-right">
-                       <p className="text-gray-500 text-sm mt-1">Total Amount :{element.product.price*element.quantity}</p>  
                       <p className="text-gray-500 text-sm mt-1">Offer Price :{element.product.offer_price*element.quantity}</p>
+                      <p className="text-gray-500 text-sm mt-1">Total Amount :{element.product.offer_price*element.quantity}</p>  
                     </div>
                   </div>
                 </div>

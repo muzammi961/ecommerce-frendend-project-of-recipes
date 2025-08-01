@@ -7,7 +7,6 @@ import {BrowserRouter,Route,Routes,Link} from 'react-router-dom'
 import Auth from './components/authentication/Registerpage'
 import Loginpage from './components/authentication/Loginpage'
 import Chengepassword from './components/authentication/chenge-password'
-// import Sample from './components/sample'
 import Prodectdata from './components/prodectside/prodects'
 import Cartsection from './components/cart/cartsection'
 import Wishlist from './components/wishlist/wishlistsection'
@@ -26,7 +25,6 @@ import OrderOneProduct from './components/order/orderoneproduct'
 import OrderDetailsAdmin from './components/adminside/useralldatas/userSpecificdetails'
 import PayProduct from './components/payment/payproduct'
 import RazorpayButton from './components/payment/razorpaysection'
-// import ActionMenu from './components/prodectside/sidebutton'
 import OrderDetail from './components/order/orderdetail'
 import Addcategary from './components/adminside/categaryside/addcategary'
 
@@ -56,13 +54,11 @@ function App() {
   <Route path='LogoutSide/' element={<LogoutSide/>}/>
   <Route path='ForgetPassword/'element={<ForgetPassword/>}/>
   <Route path='OrderOneProduct/:cartid' element={<OrderOneProduct/>}/>
-  {/* <Route path='ActionMenu/' element={<ActionMenu/>}/>  */}
  <Route path='OrderDetail/' element={<OrderDetail/>}/>
 
 <Route path='PayProduct/:cartid'element={<PayProduct/>}/>
 <Route path='RazorpayButton/' element={<RazorpayButton/>}/>
 
-{/* <Route path='Sample/' element={<Sample/>}/> */}
 
 
   <Route path='AdminsideRout/' element={<AdminHomeside/>}/>
@@ -82,10 +78,7 @@ function App() {
 
 
 
-{/* <Route path='AdminDashboard/' element={<AdminDashboard/>}/> */}
- {/* <Route path='DashboardContent/'  element={<DashboardContent/>}/> */}
  <Route path='AdminSidebar/' element={<AdminSidebar/>}/>
-{/* <Route path='UserManagementCard/' element={<UserManagementCard/>}/> */}
 </Routes>
 </MYcontext.Provider>
       

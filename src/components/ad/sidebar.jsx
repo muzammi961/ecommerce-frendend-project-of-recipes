@@ -4,6 +4,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const AdminSidebar = () => {
 let navigation=useNavigate()
+ 
+const homeside=[
+  { id: 1, name: 'AdminsideRout'},
+]
+
+
+
+
   const categories = [
     { id: 1, name: 'AdminViewallCategary'},
     { id: 2, name: 'AdminAddcategary'},
@@ -17,7 +25,7 @@ let navigation=useNavigate()
 
    const userside = [
     { id: 1, name: 'AdminsideViewallUser'},
-    { id: 4, name: 'OrderDetailsAdmin'}
+    // { id: 4, name: 'OrderDetailsAdmin'}
    
   ];
  
@@ -50,6 +58,19 @@ let logoutfun=async()=>{
       </div>
 
       <nav className="flex-1">
+         <div>
+          <h2 className="text-xs uppercase tracking-wider text-indigo-300 mb-4"> Products</h2>
+          <ul className="space-y-3">
+           {homeside.map(product => (
+              <li key={product.id}>
+                <div className="flex items-center justify-between p-2 rounded-lg hover:bg-indigo-700 transition">
+                  <Link  to={`/${product.name}`}  ><span>{product.name}</span></Link>
+                  {/* <span className="bg-indigo-600 text-xs px-2 py-1 rounded-full">{category.count}</span> */}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="mb-8">
           <h2 className="text-xs uppercase tracking-wider text-indigo-300 mb-4">Categories</h2>
           <ul className="space-y-2">
@@ -57,7 +78,7 @@ let logoutfun=async()=>{
               <li key={category.id}>
                 <div  className="flex items-center justify-between p-2 rounded-lg hover:bg-indigo-700 transition">
                   <Link  to={`/${category.name}`}><span>{category.name}</span></Link>
-                  <span className="bg-indigo-600 text-xs px-2 py-1 rounded-full">{category.count}</span>
+                  {/* <span className="bg-indigo-600 text-xs px-2 py-1 rounded-full">{category.count}</span> */}
                 </div>
               </li>
             ))}

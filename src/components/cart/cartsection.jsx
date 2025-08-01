@@ -111,64 +111,12 @@ const allOrderFunc = async () => {
 
 const [selectedProduct, setSelectedProduct] = useState(null);
 
-
-
-
-// let Ordersectionfunc=()=>{
-  
-//    navigation('/Ordersection')
-//    toast.success('order section')
-// }
   const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const offerPrice = cartItems.reduce((acc, item) => acc + item.product.offer_price * item.quantity, 0);
   const discount = totalPrice - offerPrice;
 
   return (
-    // <>
-    //   {cartItems.length > 0 ? (
-    //     <div style={{ backgroundImage: `url(${bgimage})` }}className="bg-center bg-cover min-h-screen bg-no-repeat p-6">
-    //       <h2 className="text-2xl font-bold mb-6 text-white">All Carts</h2>
-    //       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-40">
-    //         {cartItems.map((item, index) => (
-    //           <div key={index} className="bg-white border border-gray-200 rounded-2xl p-4 shadow hover:scale-105 transition-transform duration-300">
-    //             <img src={`http://127.0.0.1:8000${item.product.item_photo}`} alt={item.product.productname} className="w-full h-48 object-cover rounded-xl mb-4"/>
-    //             <h2 className="text-xl font-bold text-black mb-2">{item.product.productname}</h2>
-    //             <div className="text-gray-800 mb-3">
-    //               <p className="line-through text-sm text-red-400">₹{item.product.price}</p>
-    //               <p className="text-lg font-bold text-green-600">₹{item.product.offer_price}</p>
-    //             </div>  
-
-    //             <div className="flex justify-around items-center">
-    //               <button onClick={() => oneByoneOrderFunc(item.product.id)}className="px-4 py-2 rounded-lg bg-yellow-400 text-black hover:bg-yellow-300 transition-colors font-semibold">Order</button>
-    //               <button onClick={() => func('increase', item.quantity, item.product.id)}className="px-3 py-2 rounded-lg bg-yellow-400 text-black hover:bg-yellow-300 font-semibold">Increase</button>
-    //               <span className="px-2 text-black font-semibold">{item.quantity}</span>
-    //               <button onClick={() => func('decrease', item.quantity, item.product.id)} className="px-3 py-2 rounded-lg bg-yellow-400 text-black hover:bg-yellow-300 font-semibold">Decrease</button>
-    //             </div>
-    //           </div>))}
-    //       </div>
-    //       <div className="fixed bottom-0 left-0 w-full border-t border-gray-300 shadow-md bg-white z-50">
-    //         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-    //           <div className="w-full md:w-auto flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm md:text-base">
-    //             <span className="font-medium text-gray-700">Items: {totalCount}</span>
-    //             <span className="text-gray-700">Original: ₹{totalPrice}</span>
-    //             <span className="text-red-500">Discount: -₹{discount}</span>
-    //             <span className="font-semibold text-green-600">Total: ₹{offerPrice}</span>
-    //           </div>
-    //           <button onClick={allOrderFunc}className="w-full md:w-auto bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition">Place All Orders</button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   ) : (
-    //     <div className="bg-amber-600 w-full h-screen flex justify-center items-center">
-    //       <h1 className="text-6xl text-amber-50">Your cart is empty</h1>
-    //        <button onClick={allOrderFunc}className="w-full md:w-auto bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition">Orders all</button>
-    //     </div>
-    //   )}
-    //    <Toaster position='bottom-right'  />
-    // </>
-
-
   <>
   {selectedProduct ? (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white p-6">
@@ -375,10 +323,6 @@ const [selectedProduct, setSelectedProduct] = useState(null);
   )}
   <Toaster position="bottom-right" />
 </>
-
-    
-
-
   );
 }
 

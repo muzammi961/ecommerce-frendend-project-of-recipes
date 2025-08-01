@@ -86,21 +86,21 @@ let userAddress=async()=>{
 
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <AdminSidebar />
-      
-      <div className="flex-1 p-8 overflow-y-auto">
-        <div className="max-w-6xl mx-auto">
-          {/* Shining Header */}
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-xl p-6 mb-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full transform -translate-x-16 translate-y-16"></div>
-            <h1 className="text-3xl font-bold text-white relative z-10">Order Details</h1>
-            <p className="text-indigo-100 mt-2 relative z-10">Order #order.id</p>
-          </div>
+  <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+  <AdminSidebar />
+  
+  <div className="flex-1 p-8 overflow-y-auto">
+    <div className="max-w-6xl mx-auto">
+      {/* Shining Header */}
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-xl p-6 mb-8 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full transform -translate-x-16 translate-y-16"></div>
+        <h1 className="text-3xl font-bold text-white relative z-10">Order Details</h1>
+      </div>
 
-          
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
+      {orderdata && orderdata.length > 0 ? (
+        <>
+          {/* <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
             <div className="p-6">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div className="space-y-2">
@@ -116,7 +116,7 @@ let userAddress=async()=>{
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Order Items */}
@@ -129,7 +129,7 @@ let userAddress=async()=>{
                   <div className="p-4 flex items-center hover:bg-gray-50 transition-colors">
                     <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
                       <img 
-                         src={`http://127.0.0.1:8000${item.product.item_photo}`} 
+                        src={`http://127.0.0.1:8000${item.product.item_photo}`} 
                         alt={item.name} 
                         className="w-full h-full object-cover"
                       />
@@ -140,7 +140,6 @@ let userAddress=async()=>{
                     </div>
                     <div className="text-right">
                       <p className="font-medium text-gray-800">{item.product.offer_price}</p>
-                      {/* <p className="text-sm text-gray-500">${(parseFloat(item.product.price.replace('$', '')) * item.quantity).toFixed(2)}</p> */}
                     </div>
                   </div>
                 ))}
@@ -161,55 +160,64 @@ let userAddress=async()=>{
                   <h3 className="font-semibold text-gray-800">Customer Information</h3>
                 </div>
                 <div className="p-6 space-y-4">
+
+
+
+                  {address.map(add => (
                   <div className="flex items-center">
                     <div className="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-medium">
-                      {order.customer.name.charAt(0)}
+                      {add.nameofuser.charAt(0)}
                     </div>
                     <div className="ml-4">
-                      <h4 className="font-medium text-gray-800">{order.customer.name}</h4>
-                      <p className="text-gray-600">{order.customer.email}</p>
-                      <p className="text-gray-600">{order.customer.phone}</p>
+                      <h4 className="font-medium text-gray-800">{add.nameofuser}</h4>
+                      <p className="text-gray-600">{add.phonenumber}</p>
+                      <p className="text-gray-600">{add.state}</p>
                     </div>
                   </div>
+                    ))}
+
+
+
+
+                  
                 </div>
               </div>
 
-           
               <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-b border-gray-200">
                   <h3 className="font-semibold text-gray-800">Shipping Address</h3>
                 </div>
-                {address.map(add=>(
-                <div className="p-6 bg-white rounded-md shadow-md w-full max-w-lg">
-                 <div className="space-y-3 text-gray-800 leading-relaxed">
-               <p><strong>Name:</strong> {add.nameofuser}</p>
-              <p><strong>Phone:</strong> {add.phonenumber}</p>
-             <p><strong>House / Building:</strong> {add.houseno_buildingname}</p>
-            <p><strong>Road Name:</strong> {add.Roadname}</p>
-           <p><strong>City:</strong> {add.city}</p>
-           <p><strong>State:</strong> {add.state}</p>
-          <p><strong>Pincode:</strong> {add.pincode}</p>
-          </div>
-         </div>
-
+                {address.map(add => (
+                  <div className="p-6 bg-white rounded-md shadow-md w-full max-w-lg">
+                    <div className="space-y-3 text-gray-800 leading-relaxed">
+                      <p><strong>Name:</strong> {add.nameofuser}</p>
+                      <p><strong>Phone:</strong> {add.phonenumber}</p>
+                      <p><strong>House / Building:</strong> {add.houseno_buildingname}</p>
+                      <p><strong>Road Name:</strong> {add.Roadname}</p>
+                      <p><strong>City:</strong> {add.city}</p>
+                      <p><strong>State:</strong> {add.state}</p>
+                      <p><strong>Pincode:</strong> {add.pincode}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
-
-    
             </div>
           </div>
-
-          {/* Back Button
-          <div className="mt-8">
-            <button className="px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all duration-200">
-              Back to Orders
-            </button>
-          </div> */}
+        </>
+      ) : (
+        <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+          <div className="text-gray-500 text-xl font-medium mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <p className="mt-4">This user hasn't ordered anything yet</p>
+          </div>
         </div>
-      </div>
-      <Toaster position='bottom-right
-      '/>
+      )}
     </div>
+  </div>
+  <Toaster position='bottom-right'/>
+</div>
   );
 }
 

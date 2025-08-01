@@ -116,7 +116,7 @@ let userdatadestroyfunc=async(id)=>{
                       Email
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Role
+                    Details
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Status
@@ -152,7 +152,7 @@ let userdatadestroyfunc=async(id)=>{
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <span className={`px-2 py-1 text-xs rounded-full ${
-                          user.active 
+                          user.active111
                             ? 'bg-green-100 text-green-800' 
                             : 'bg-red-100 text-red-800'
                         }`}>

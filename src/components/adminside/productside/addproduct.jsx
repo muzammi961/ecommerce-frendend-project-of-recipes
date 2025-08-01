@@ -106,9 +106,7 @@ export default function AddProduct() {
                     value={form.price}
                     onChange={(e) => setForm({...form, price: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm"
-                    placeholder="0.00"
-                    step="0.01"
-                  />
+                    placeholder="0.00"step="0.01"/>
                 </div>
 
                 {/* Offer Price */}

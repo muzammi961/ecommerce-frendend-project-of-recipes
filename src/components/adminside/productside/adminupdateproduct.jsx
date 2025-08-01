@@ -2,9 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AdminSidebar from "../../ad/sidebar";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function UpdateProducts() {
+  let navigation=useNavigate()
   const [categories, setCategories] = useState([]);
   const { update_id } = useParams();
   const [productdatas, setUpdateProduct] = useState({
@@ -75,9 +77,10 @@ function UpdateProducts() {
           },
         }
       );
-      alert("Product updated successfully!");
+      navigation('/ViewallProudctByCategary')
+      toast.success("Product updated successfully!");
     } catch (e) {
-      console.log("Error updating product:", e.response?.data || e);
+      toast.error("Error updating product:", e.response?.data || e);
     }
   };
 

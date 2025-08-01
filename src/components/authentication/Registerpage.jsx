@@ -24,6 +24,10 @@ let subfunc = async (e) => {
     toast.error('Username is required');
    return
   }
+  const trimmedName=state.username.trim()
+  if(/^[.]+$/.test(trimmedName)){
+    toast.error('user can not register with only dot......!')
+  }
 
   if (!state.email || !emailRegex.test(state.email)) {
     toast.error('Enter a valid email address');
