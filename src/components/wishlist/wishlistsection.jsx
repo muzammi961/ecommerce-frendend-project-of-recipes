@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import bgimage from '../../assets/backgroundImage.jpg';
+
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
