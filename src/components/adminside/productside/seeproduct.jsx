@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast,{ Toaster } from 'react-hot-toast';
 import AdminSidebar from '../../ad/sidebar';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Seeproducts() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Seeproducts() {
 
   const getProductsData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/adminside/GetallProducts/', {
+      const response = await axios.get(`${apiUrl}/adminside/GetallProducts/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts(response.data);
@@ -30,7 +31,7 @@ function Seeproducts() {
 
   const deleteProduct = async (productId) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/adminside/DeleteaProduct/${productId}/`, {
+      await axios.delete(`${apiUrl}/adminside/DeleteaProduct/${productId}/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Product deleted successfully!');

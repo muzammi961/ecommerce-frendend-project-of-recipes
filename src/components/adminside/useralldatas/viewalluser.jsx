@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import AdminSidebar from '../../ad/sidebar'
 import { useNavigate } from 'react-router-dom';
 import toast,{ Toaster } from 'react-hot-toast';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const ViewallUser = () => {
   let navigation=useNavigate()
@@ -14,7 +15,7 @@ const ViewallUser = () => {
     const fetchUsers = async () => { 
       let token = localStorage.getItem('access')  
       try {
-        const response = await axios.get('http://127.0.0.1:8000/adminside/AdminViewallUser/', {
+        const response = await axios.get(`${apiUrl}/adminside/AdminViewallUser/`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

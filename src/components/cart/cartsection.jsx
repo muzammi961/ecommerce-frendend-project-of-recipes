@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import bgimage from '../../assets/backgroundImage.jpg';
 import toast, { Toaster } from 'react-hot-toast';
 import Ordersection from '../order/ordersection';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Cartsection() {
   let navigation=useNavigate()
@@ -14,7 +15,7 @@ function Cartsection() {
   }, []);
   const getCartData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/cart/CartViewByUser/', {
+      const response = await axios.get(`${apiUrl}/cart/CartViewByUser/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCartItems(response.data);
@@ -26,7 +27,7 @@ function Cartsection() {
   const func = async (value, quantity, id) => {
     console.log('id is ......',id)
     try {
-      const res = await axios.patch(`http://127.0.0.1:8000/cart/UpdatetheQuantity/${id}/`,{quantity,value},{headers:{Authorization:`Bearer ${token}`}});
+      const res = await axios.patch(`${apiUrl}/cart/UpdatetheQuantity/${id}/`,{quantity,value},{headers:{Authorization:`Bearer ${token}`}});
       const updatedQuantity = res.data.new_quantity;
        setCartItems(prevItems => prevItems.map(item => item.product.id === id ? { ...item, quantity: updatedQuantity } : item));
       if (value==='increase'){ 
@@ -56,7 +57,7 @@ const oneByoneOrderFunc = async (cartid) => {
   //   console.error('Error:', e.message);
   // }
 try {
-    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
+    let urldata = await axios.get(`${apiUrl}/orders/UseraddressGet`,{ headers:{Authorization:`Bearer ${token}`}});
     if (!urldata.data[0]?.nameofuser) {
       toast.error('User address not received.');
       toast.success('address section..')
@@ -86,7 +87,7 @@ try {
 const allOrderFunc = async () => {
   try {
     let token=localStorage.getItem('access')
-    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
+    let urldata = await axios.get(`${apiUrl}/orders/UseraddressGet`,{ headers:{Authorization:`Bearer ${token}`}});
     if (!urldata.data[0]?.nameofuser) {
        console.log('urls data sss.',urldata.data)
       toast.error('User address not received.');

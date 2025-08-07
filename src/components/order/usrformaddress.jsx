@@ -2,6 +2,7 @@ import bgimage from '../../assets/backgroundImage.jpg';
 import { useReducer } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 import axios from 'axios';
 
 function Userformaddress() {
@@ -26,7 +27,7 @@ function Userformaddress() {
   let submitButton = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://127.0.0.1:8000/orders/UserformAddress', state, {
+      await axios.post(`${apiUrl}/orders/UserformAddress`, state, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if(cartid==="0"){

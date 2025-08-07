@@ -3,6 +3,7 @@ import { useEffect,useState } from "react";
 import bgimage from '../../assets/backgroundImage.jpg' 
 import { useNavigate } from "react-router-dom";
 import toast,{ Toaster } from "react-hot-toast";
+const apiUrl = import.meta.env.VITE_API_URL;
 function Ordersection(){
 let navigation=useNavigate()  
 let [orderproduct,setProduct]=useState([])
@@ -11,7 +12,7 @@ let OrderProductfunc=async()=>{
 let token=localStorage.getItem('access')
 try{
 // let value=await axios.get('http://127.0.0.1:8000/orders/OrderDetile/',{
-let value=await axios.get('http://127.0.0.1:8000/cart/CartViewByUser/',{
+let value=await axios.get(`${apiUrl}/cart/CartViewByUser/`,{
   headers:{
     Authorization:`Bearer ${token}`
   }
@@ -31,7 +32,7 @@ console.log('OrderProductfunc',orderproduct)
 const OrderformCheck = async () => {
   try {
     let token=localStorage.getItem('access')
-    let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
+    let urldata = await axios.get(`${apiUrl}/orders/UseraddressGet`,{ headers:{Authorization:`Bearer ${token}`}});
     console.log('url data....',urldata.data)
     if (!urldata.data[0]?.nameofuser) {
        console.log('urls data sss.',urldata.data)

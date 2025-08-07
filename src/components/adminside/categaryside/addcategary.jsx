@@ -3,6 +3,7 @@ import AdminSidebar from '../../ad/sidebar';
 import { useState,useEffect } from 'react';
 import toast,{Toaster} from 'react-hot-toast';
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 
 
@@ -16,7 +17,7 @@ getcurrentcategory()
 let getcurrentcategory=async()=>{
     let token=localStorage.getItem('access')
  try{
-  let getcategorys=await axios.get('http://127.0.0.1:8000/adminside/GetallCategory/',{
+  let getcategorys=await axios.get(`${apiUrl}/adminside/GetallCategory/`,{
     headers:{
         Authorization:`Bearer ${token}`
     }
@@ -36,7 +37,7 @@ let createCategory=async(e)=>{
     console.log('newstate',newstate)
     let token=localStorage.getItem('access')
     try{
-      await axios.post('http://127.0.0.1:8000/adminside/CreateCategory/',{name:newstate},{
+      await axios.post(`${apiUrl}/adminside/CreateCategory/`,{name:newstate},{
         headers:{
             Authorization:`Bearer ${token}`
         }

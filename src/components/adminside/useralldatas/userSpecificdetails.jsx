@@ -4,48 +4,43 @@ import axios from 'axios';
 import toast,{Toaster} from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { useEffect,useState,useReducer } from 'react';
+const apiUrl = import.meta.env.VITE_API_URL;
 function OrderDetailsAdmin() {
   let [orderdata,setOrderdata]=useState([])
   let [totalprice,setTotalprice]=useState('')
   let [address,setAddress]=useState([])
   let {userid}=useParams()
 
-// let usereducerfunc=()=>{
-
-// }
-
-
-//   let {userdb,useRed}=useReducer(usereducerfunc,{username:'',useremail:'',userphonenumber:'',userorderprice:''})
-  const order = {
-    id: 'ORD-789012',
-    date: '2023-11-15 14:30',
-    status: 'Delivered',
-    total: '$149.99',
-    paymentMethod: 'Credit Card',
-    items: [
-      { id: 1, name: 'Wireless Headphones', price: '$99.99', quantity: 1, image: '/path/to/image1.jpg' },
-      { id: 2, name: 'Phone Case', price: '$25.00', quantity: 2, image: '/path/to/image2.jpg' }
-    ],
-    customer: {
-      name: 'John Doe',
-      email: 'john@example.com',
-      phone: '+1 (555) 123-4567'
-    },
-    shippingAddress: {
-      street: '123 Main St',
-      city: 'New York',
-      state: 'NY',
-      zip: '10001',
-      country: 'United States'
-    },
-    billingAddress: {
-      street: '123 Main St',
-      city: 'New York',
-      state: 'NY',
-      zip: '10001',
-      country: 'United States'
-    }
-  };
+  // const order = {
+  //   id: 'ORD-789012',
+  //   date: '2023-11-15 14:30',
+  //   status: 'Delivered',
+  //   total: '$149.99',
+  //   paymentMethod: 'Credit Card',
+  //   items: [
+  //     { id: 1, name: 'Wireless Headphones', price: '$99.99', quantity: 1, image: '/path/to/image1.jpg' },
+  //     { id: 2, name: 'Phone Case', price: '$25.00', quantity: 2, image: '/path/to/image2.jpg' }
+  //   ],
+  //   customer: {
+  //     name: 'John Doe',
+  //     email: 'john@example.com',
+  //     phone: '+1 (555) 123-4567'
+  //   },
+  //   shippingAddress: {
+  //     street: '123 Main St',
+  //     city: 'New York',
+  //     state: 'NY',
+  //     zip: '10001',
+  //     country: 'United States'
+  //   },
+  //   billingAddress: {
+  //     street: '123 Main St',
+  //     city: 'New York',
+  //     state: 'NY',
+  //     zip: '10001',
+  //     country: 'United States'
+  //   }
+  // };
 
   useEffect(() => {
     userOrderDetails(userid);
@@ -55,7 +50,7 @@ function OrderDetailsAdmin() {
     const token = localStorage.getItem('access');
     console.log(token)
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/adminside/OrderDetailsBYuser/${userid}/`, {headers: {Authorization: `Bearer ${token}`}});
+      const response = await axios.get(`${apiUrl}/adminside/OrderDetailsBYuser/${userid}/`, {headers: {Authorization: `Bearer ${token}`}});
       console.log(response.data[0].product.productname);
       setOrderdata(response.data)
       
@@ -69,7 +64,7 @@ function OrderDetailsAdmin() {
 let userAddress=async()=>{
     const token=localStorage.getItem('access')
     try{
-      let addressdata=await axios.get(`http://127.0.0.1:8000/adminside/GetAddressBYUser/${userid}/`,{headers:{Authorization :`Bearer ${token}`}})
+      let addressdata=await axios.get(`${apiUrl}/adminside/GetAddressBYUser/${userid}/`,{headers:{Authorization :`Bearer ${token}`}})
       setAddress(addressdata.data)
        toast.success('address got')
     }catch(e){

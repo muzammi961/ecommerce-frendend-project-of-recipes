@@ -3,6 +3,7 @@ import axios from 'axios';
 import bgimage from '../../assets/backgroundImage.jpg';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Wishlist() {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ function Wishlist() {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/cart/WishListViewByUser/', {
+        const response = await axios.get(`${apiUrl}/cart/WishListViewByUser/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProducts(response.data);
@@ -27,7 +28,7 @@ function Wishlist() {
     try {
       const postValue = { product: productId, quantity: 1 };
       const response = await axios.post(
-        'http://127.0.0.1:8000/cart/AddProductCart/',
+        `${apiUrl}/cart/AddProductCart/`,
         postValue,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -43,7 +44,7 @@ function Wishlist() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://127.0.0.1:8000/cart/DeletetheWishListOneByOne/${id}/`,
+        `${apiUrl}/cart/DeletetheWishListOneByOne/${id}/`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -58,7 +59,7 @@ function Wishlist() {
 
   const oneByOneOrderFunc = async (cartId) => {
     try {
-      const res = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet', {
+      const res = await axios.get(`${apiUrl}/orders/UseraddressGet`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -69,7 +70,7 @@ function Wishlist() {
               product: cartId,
                quantity: 1,
               };
-              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              await axios.post(`${apiUrl}/cart/AddProductCart/`,postValue,{headers: {Authorization: `Bearer ${token}`,},});
               toast.success("Added to cart!");
             } catch (e) {
               console.error("Error adding to cart:", e.message);

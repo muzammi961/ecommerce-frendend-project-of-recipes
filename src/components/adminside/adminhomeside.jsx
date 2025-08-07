@@ -1,43 +1,13 @@
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast,{ Toaster } from 'react-hot-toast';
 import AdminSidebar from '../ad/sidebar';
-
+import axios from 'axios';
+import { useEffect,useState } from 'react';
+const apiUrl = import.meta.env.VITE_API_URL;
 function AdminHomeside() {
   // Sample data for stats cards
-  const stats = [
-    { 
-      title: "Total Recipes", 
-      value: "1,248", 
-      change: "+42", 
-      icon: "📜", 
-      color: "from-purple-500 to-indigo-500",
-      description: "In your collection" 
-    },
-    { 
-      title: "Monthly Views", 
-      value: "24,568", 
-      change: "+18%", 
-      icon: "👀", 
-      color: "from-green-500 to-teal-500",
-      description: "Recipe page visits" 
-    },
-    { 
-      title: "Active Cooks", 
-      value: "2,843", 
-      change: "+8%", 
-      icon: "👨‍🍳", 
-      color: "from-blue-500 to-cyan-500",
-      description: "Using your recipes" 
-    },
-    { 
-      title: "Rating", 
-      value: "4.8★", 
-      change: "+0.2", 
-      icon: "⭐", 
-      color: "from-amber-500 to-orange-500",
-      description: "Average recipe rating" 
-    }
-  ];
+  const[dashdata,setDashdata]=useState([])
+
 
   // Sample recent activities
   const recentActivities = [
@@ -121,7 +91,29 @@ function AdminHomeside() {
     { day: "Sat", engagement: 18 },
     { day: "Sun", engagement: 14 }
   ];
+useEffect(() => {
+  dashboarddatas();
+}, []);
 
+const dashboarddatas = async () => {
+  const token = localStorage.getItem('access');
+  try {
+    const dashboardvalue = await axios.get(`${apiUrl}/adminside/Dashboardstats/`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log('datas ...', dashboardvalue.data);
+    setDashdata(dashboardvalue.data);
+    console.log('dashboard data received...');
+  } catch (e) {
+    console.log('dashboard data not received...', e);
+  }
+};
+
+
+
+  
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
       <AdminSidebar />
@@ -138,7 +130,7 @@ function AdminHomeside() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {stats.map((stat, index) => (
+            {dashdata.map((stat, index) => (
               <div 
                 key={index} 
                 className={`bg-gradient-to-r ${stat.color} rounded-xl shadow-lg p-6 text-white transform hover:scale-[1.02] transition-all duration-300 hover:shadow-xl`}
@@ -151,8 +143,6 @@ function AdminHomeside() {
                     <p className="text-sm text-white text-opacity-80">{stat.title}</p>
                     <p className="text-2xl font-bold">{stat.value}</p>
                     <p className="text-sm mt-1 text-white text-opacity-90 flex items-center">
-                      <span className="mr-1">{stat.change}</span> 
-                      <span className="text-xs opacity-80">{stat.description}</span>
                     </p>
                   </div>
                 </div>

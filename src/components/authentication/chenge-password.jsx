@@ -1,10 +1,11 @@
 import './style/registerpage.css'
-import hotellogo from '../../assets/hotellogo.jpg'
+import hotellogo from '../../assets/hotellogo.png'
 import { useRef } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import toast,{Toaster} from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 function Chengepassword(){
   let [state,setData]=useState({currentpass:'',newpass:'',confirmpass:''})
   let navigation=useNavigate()
@@ -20,7 +21,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
   if (!state.newpass || !strongPasswordRegex.test(state.confirmpass)) {
        toast.error('Password must be 6+ characters, include upper/lowercase, number, and special character');
   }          
-   await axios.post('http://127.0.0.1:8000/authentication/ChangePasswordAPIView/',{old_password:state.currentpass,new_password:state.newpass},{
+   await axios.post(`${apiUrl}/authentication/ChangePasswordAPIView/`,{old_password:state.currentpass,new_password:state.newpass},{
     headers:{
       Authorization:`Bearer ${token}`
     }

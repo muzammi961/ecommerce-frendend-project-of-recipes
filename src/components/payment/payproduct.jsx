@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function PayProduct() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function PayProduct() {
   const getCartItems = async () => {
     const token = localStorage.getItem("access");
     try {
-      const res = await axios.get("http://127.0.0.1:8000/cart/CartViewByUser/", {
+      const res = await axios.get(`${apiUrl}/cart/CartViewByUser/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCartItems(res.data);
@@ -52,7 +53,7 @@ function PayProduct() {
   const getAddress = async () => {
     const token = localStorage.getItem("access");
     try {
-      const res = await axios.get("http://127.0.0.1:8000/orders/UseraddressGet", {
+      const res = await axios.get(`${apiUrl}/orders/UseraddressGet`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAddress(res.data[0]);
@@ -64,7 +65,7 @@ function PayProduct() {
   const getProductDetails = async (id) => {
     const token = localStorage.getItem("access");
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/products/ViewSpecificProduct/${id}/`, {
+      const res = await axios.get(`${apiUrl}/products/ViewSpecificProduct/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProduct(res.data);
@@ -76,8 +77,8 @@ function PayProduct() {
   const handlePayClick = async () => {
     try {
       const amountToSend = cartid === "0" ? total : product.offer_price || 0;
-
-      const res = await axios.post("http://127.0.0.1:8000/payments/create-order/", {
+      // const res = await axios.post("http://127.0.0.1:8000/payments/create-order/", {
+      const res = await axios.post(`${apiUrl}/payments/create-order/`, {
         amount: amountToSend,
       });
 
@@ -89,7 +90,8 @@ function PayProduct() {
         description: "Test Transaction",
         order_id: res.data.id,
         handler: async function (response) {
-          await axios.post("http://127.0.0.1:8000/payments/verify-payment/", response);
+          // await axios.post("http://127.0.0.1:8000/payments/verify-payment/", response);
+          await axios.post(`${apiUrl}/payments/verify-payment/`, response);
           console.log("Payment Verified");
 
           // Order API
@@ -97,12 +99,12 @@ function PayProduct() {
 
           try {
             if (cartid !== "0") {
-              await axios.post(`http://127.0.0.1:8000/orders/OrderOneProductView/${cartid}/`, {}, {
+              await axios.post(`${apiUrl}/orders/OrderOneProductView/${cartid}/`, {}, {
                 headers: { Authorization: `Bearer ${token}` },
               });
               toast.success("Your single product was ordered successfully.");
             } else {
-              await axios.post("http://127.0.0.1:8000/orders/OrderProduct/", {}, {
+              await axios.post(`${apiUrl}/orders/OrderProduct/`, {}, {
                 headers: { Authorization: `Bearer ${token}` },
               });
               toast.success("All cart items were ordered successfully.");

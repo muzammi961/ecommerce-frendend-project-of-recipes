@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast,{Toaster} from 'react-hot-toast';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const OrderDetail = () => {
 let navigation=useNavigate()
@@ -16,7 +17,7 @@ gettheorderdatas()
 let gettheorderdatas=async()=>{
     let token=localStorage.getItem('access')
     try{
-    let orderdata=await axios.get('http://127.0.0.1:8000/orders/OrderDetile/',{
+    let orderdata=await axios.get(`${apiUrl}/orders/OrderDetile/`,{
         headers:{
             Authorization:`Bearer ${token}` 
         }

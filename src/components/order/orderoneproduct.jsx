@@ -3,6 +3,7 @@ import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function OrderOneProduct() {
   let navigation = useNavigate();
@@ -26,7 +27,7 @@ useEffect(() => {
 
   const getAddress = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/orders/UseraddressGet", {
+      const response = await axios.get(`${apiUrl}/orders/UseraddressGet`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAddress(response.data[0]);
@@ -37,7 +38,7 @@ useEffect(() => {
 
   const getProductDetails = async (id) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/products/ViewSpecificProduct/${id}/`,
+        const response = await axios.get(`${apiUrl}/products/ViewSpecificProduct/${id}/`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -64,7 +65,7 @@ useEffect(() => {
 
   let updatetheaddress = async () => {
     try {
-      await axios.put('http://127.0.0.1:8000/orders/UpdateUserAddress/', upaddres, {
+      await axios.put(`${apiUrl}/orders/UpdateUserAddress/`, upaddres, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Address updated successfully!');

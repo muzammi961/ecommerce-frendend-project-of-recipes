@@ -1,168 +1,10 @@
-// import { useState,useEffect } from "react"
-// import toast,{Toaster} from 'react-hot-toast'
-// import axios from "axios"
-// import hotellogo from '../../assets/hotellogo.jpg'
-// import './prodectstyle/prodectst.css'
-// import { Link } from "react-router-dom"
-// import { useNavigate } from "react-router-dom"
-// function Prodecthomepage(){
-// let[serch,setSerch]=useState('')
-//   let navigation=useNavigate()
-//   const [products, setProducts] = useState([]);
-//   let token=localStorage.getItem('access')
-//   console.log(token)
-//   useEffect(() => {
-//     // toast('login seccsses')
-//     const fetchData = async () => {
-//       try {
-//         let response = await axios.get("http://127.0.0.1:8000/products/ViewProductsByCategory/main dish/",{headers:{Authorization:`Bearer ${token}`}});
-//         console.log(response.data)
-//         setProducts(response.data);
-//       } catch (error) {
-//         console.log("Error fetching data:", error);
-//       }
-//     };
-//     fetchData();
-//   }, []);
-
-
-
-// const oneByoneOrderFunc = async (cartid) => {
-//   console.log('categary number ...',cartid)
-//   // try {
-//   //   const response = await axios.post(`http://127.0.0.1:8000/orders/OrderOneProductView/${cartid}/`,{},{headers: {Authorization: `Bearer ${token}`}});
-//   // } catch (e) {
-//   //   toast.error('Cart did not add to order section');
-//   //   console.error('Error:', e.message);
-//   // }
-// try {
-//     let urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet',{ headers:{Authorization:`Bearer ${token}`}});
-//     if (!urldata.data[0]?.nameofuser) {
-//       toast.error('User address not received.');
-//       toast.success('address section..')
-//       navigation('/Userformaddress')
-//     } else {
-//       toast.success('order section...')
-//       navigation(`/OrderOneProduct/${cartid}`)
-//     }
-//   } catch (e) {
-//     toast.error('Cart is empty!');
-//     console.log('Error:', e);
-//   }
-// };
-
-
-
-
-//   const addToWishlist = async (productId) => {
-//     try {
-//       await axios.post(
-//         "http://127.0.0.1:8000/cart/AddProductWishlist/",
-//         { product: productId },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       toast.success("You have added the product to wishlist");
-//     } catch (e) {
-//       console.error("Error adding to wishlist:", e.message);
-//       toast.error("Failed to add to wishlist");
-//     }
-//   };
-
-
-
-//   const addToCart = async (productId) => {
-//     try {
-//       const postValue = {
-//         product: productId,
-//         quantity: 1,
-//       };
-//       const response = await axios.post(
-//         "http://127.0.0.1:8000/cart/AddProductCart/",
-//         postValue,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       toast.success("You have added the product to cart");
-//     } catch (e) {
-//       console.error("Error adding to cart:", e.message);
-//       toast.error("Failed to add to cart");
-//     }
-//   };
-
-
-
-//     return(
-//     <div   style={{backgroundImage: products.length > 0 ?`url(http://127.0.0.1:8000${products[0].item_photo})`: 'none'}} className="w-full h-auto bg-cover bg-no-repeat bg-center">
-//   <div className="w-full h-[30rem] mx-auto shadow-lg bg-cover bg-center bg-no-repeat overflow-hidden animate-mainrecipe menu-mainrecipe ">
-//     <div className="m-3 px-6 flex items-center justify-between  rounded-3xl">
-//     <img className="w-16 h-16 object-cover rounded-full" src={hotellogo} alt="Logo" />
-//       <form className=" flex items-center gap-2  ">
-//         <input type="text" placeholder="Search" className="placeholder-white placeholder:font-bold outline-none  text-white px-3 py-2 rounded-lg focus:outline-none border border-gray-300 backdrop-blur"/>
-//         <button className="outline-none border-gray-300 text-white px-4 py-2 rounded-lg  border backdrop-blur">Search</button>
-//       </form>
-//       <div className="flex gap-3">
-//         <Link to={'/'} className="px-4 py-2 border rounded-lg shadow border-gray-300 text-white backdrop-blur">Register</Link>
-//         <Link to={'/loginpage'} className="px-4 py-2 border rounded-lg border-gray-300 text-white backdrop-blur">Login</Link>
-//       </div>
-//     </div>
-//     <div>
-//       <div className="text-center py-12 bg-gradient-to-r  rounded-lg shadow-md">
-//   <h1 className=" text-amber-400 mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-7xl font-bold"> Welcome to Fusion Feast – Where Global Flavors Unite!</h1>
-//   <p className="text-lg text-amber-200 max-w-3xl mx-auto">Discover bold, unique, and gourmet recipes that blend cultures and creativity into every bite. Whether you're craving comfort or culinary adventure, our curated recipes promise something extraordinary for every foodie.</p>
-//     <br/>
-//   <Link to={'/prodectdata'}  className="text-white border py-2 px-4 rounded-md border-gray-300 backdrop-blur-2xl">show recipes</Link>
-// </div>
-//     </div>  
-//   </div>
-//   {products.map((product,index)=>(
-//     // <h1 key={index.id}>{element.productname}</h1>
-//     <div className=" shadow-lg  p-4 w-full  hover:scale-105 transition-transform duration-700 flex flex-col ">
-//       <img src={`http://127.0.0.1:8000${product.item_photo}`} alt={product.productname} className="h-screen w-screen object-cover rounded-xl"/>
-//       <div className="mt-4 rounded-2xl w-2/2">
-//         <h2 className="text-lg font-semibold text-white">{product.productname}</h2>
-//         <p className="text-sm text-white mt-1">{product.description}</p>
-//         <div className="flex items-center justify-between mt-3">
-//           <span className="text-lg font-bold text-green-600">₹{product.price}</span>
-//           <span className="text-lg font-bold text-green-600">₹{product.offer_price}</span>
-//            <button onClick={() => addToCart(product.id)}className="px-4 py-2 rounded-lg bg-yellow-400 text-black hover:bg-yellow-300 transition-colors font-semibold"> Add Cart</button>
-//             <button onClick={() => oneByoneOrderFunc(product.id)}className="px-4 py-2 rounded-lg bg-yellow-400 text-black hover:bg-yellow-300 transition-colors font-semibold">Order</button>
-//              <button onClick={() => addToWishlist(product.id)}className="px-4 py-2 rounded-lg bg-yellow-400 text-black hover:bg-yellow-300 transition-colors font-semibold">Wishlist</button>
-//         </div>
-//       </div>
-//     </div> 
-//    ))};
-//    <Toaster position="bottom-right" />
-// </div>
-
-
-//     )
-// }
-// export default Prodecthomepage;
-
-
-
-
-
-
-
-
-
-
-
-
 import { useState, useEffect } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios";
-import hotellogo from '../../assets/hotellogo.jpg';
+import hotellogo from '../../assets/hotellogo.png';
 import './prodectstyle/prodectst.css';
 import { Link, useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Prodecthomepage() {
   const [search, setSearch] = useState('');
@@ -176,7 +18,7 @@ function Prodecthomepage() {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          "http://127.0.0.1:8000/products/ViewProductsByCategory/main dish/",
+          `${apiUrl}/products/ViewProductsByCategory/main dish/`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setProducts(response.data);
@@ -192,11 +34,11 @@ function Prodecthomepage() {
                                                           // erro here 
   const oneByoneOrderFunc = async (cartid) => {   
     
-    alert(`this is the order id form the homside ${cartid}`)
+    // alert(`this is the order id form the homside ${cartid}`)
     console.log('this is the order id form homside .....',cartid)
     try {
       let token=localStorage.getItem('access')
-      const urldata = await axios.get('http://127.0.0.1:8000/orders/UseraddressGet', { headers: { Authorization: `Bearer ${token}`}});
+      const urldata = await axios.get(`${apiUrl}/orders/UseraddressGet`, { headers: { Authorization: `Bearer ${token}`}});
       if (!urldata.data[0]?.nameofuser) {
         toast.error('Please add your address first');
          
@@ -206,7 +48,7 @@ function Prodecthomepage() {
               product: cartid,
                quantity: 1,
               };
-              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              await axios.post(`${apiUrl}/cart/AddProductCart/`,postValue,{headers: {Authorization: `Bearer ${token}`,},});
               toast.success("Added to cart!");
             } catch (e) {
               console.error("Error adding to cart:", e.message);
@@ -226,7 +68,7 @@ function Prodecthomepage() {
               product: cartid,
                quantity: 1,
               };
-              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              await axios.post(`${apiUrl}/cart/AddProductCart/`,postValue,{headers: {Authorization: `Bearer ${token}`,},});
               toast.success("Added to cart!");
             } catch (e) {
               console.error("Error adding to cart:", e.message);
@@ -245,7 +87,7 @@ function Prodecthomepage() {
   const addToWishlist = async (productId) => {
     try {
       await axios.post(
-        "http://127.0.0.1:8000/cart/AddProductWishlist/",
+        `${apiUrl}/cart/AddProductWishlist/`,
         { product: productId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -259,7 +101,7 @@ function Prodecthomepage() {
   const addToCart = async (productId) => {
     try {
       await axios.post(
-        "http://127.0.0.1:8000/cart/AddProductCart/",
+        `${apiUrl}/cart/AddProductCart/`,
         { product: productId, quantity: 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );

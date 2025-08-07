@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import hotellogo from '../../assets/hotellogo.jpg'
+import hotellogo from '../../assets/hotellogo.png'
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useReducer } from 'react';
+const apiUrl = import.meta.env.VITE_API_URL;
 function Auth(){
 let navigation=useNavigate()
 const reducer = (state, action) => {
@@ -46,7 +47,7 @@ let subfunc = async (e) => {
 
   try {
     let valuedata = await axios.post(
-      'http://127.0.0.1:8000/authentication/userregisteration/', state
+      `${apiUrl}/authentication/userregisteration/`, state
     );
     toast.success('Registered successfully!');
     navigation('/loginpage');

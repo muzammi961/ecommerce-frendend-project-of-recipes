@@ -1,4 +1,5 @@
 import axios from "axios"
+const apiUrl = import.meta.env.VITE_API_URL;
 import { useNavigate } from "react-router-dom"
 
 function LogoutSide(){
@@ -8,7 +9,7 @@ let Logoutfunc=async()=>{
     let access=localStorage.getItem('access')
     console.log('refresh....',refresh)
     console.log('access......',access)
-    await axios.post('http://127.0.0.1:8000/authentication/UserLogout/',{refresh},{
+    await axios.post(`${apiUrl}/authentication/UserLogout/`,{refresh},{
         headers:{ Authorization: `Bearer ${access}`}
     })
     localStorage.removeItem('refresh')

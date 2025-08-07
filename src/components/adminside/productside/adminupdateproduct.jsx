@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import AdminSidebar from "../../ad/sidebar";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 function UpdateProducts() {
   let navigation=useNavigate()
   const [categories, setCategories] = useState([]);
@@ -25,7 +25,7 @@ function UpdateProducts() {
   const fetchCategories = async () => {
     try {
       const token = localStorage.getItem("access");
-      const res = await axios.get("http://127.0.0.1:8000/adminside/GetallCategory/", {
+      const res = await axios.get(`${apiUrl}/adminside/GetallCategory/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCategories(res.data);
@@ -37,7 +37,7 @@ function UpdateProducts() {
   const fetchProduct = async () => {
     try {
       const token = localStorage.getItem("access");
-      const res = await axios.get(`http://127.0.0.1:8000/adminside/GetSpecificProduct/${update_id}/`, {
+      const res = await axios.get(`${apiUrl}/adminside/GetSpecificProduct/${update_id}/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUpdateProduct({
@@ -68,7 +68,7 @@ function UpdateProducts() {
 
     try {
       await axios.put(
-        `http://127.0.0.1:8000/adminside/UpdateProductView/${update_id}/`,
+        `${apiUrl}/adminside/UpdateProductView/${update_id}/`,
         formData,
         {
           headers: {

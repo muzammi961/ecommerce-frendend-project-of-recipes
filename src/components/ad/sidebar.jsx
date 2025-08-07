@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import toast,{Toaster} from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 const AdminSidebar = () => {
 let navigation=useNavigate()
  
@@ -35,7 +36,7 @@ let logoutfun=async()=>{
   let accesstoken=localStorage.getItem('access')
   let refreshtoken=localStorage.getItem('refresh')
   console.log(accesstoken,'             ',refreshtoken)
-  await axios.post('http://127.0.0.1:8000/authentication/UserLogout/',{refresh:refreshtoken},{
+  await axios.post(`${apiUrl}/authentication/UserLogout/`,{refresh:refreshtoken},{
     headers:{
     Authorization:`Bearer ${accesstoken}`}})
   localStorage.removeItem('access')

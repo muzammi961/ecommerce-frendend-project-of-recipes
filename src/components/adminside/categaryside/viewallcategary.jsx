@@ -3,6 +3,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import AdminSidebar from '../../ad/sidebar'; // Adjust the import path as needed
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 function ViewallCategary() {
   const [categories, setCategories] = useState([]);
   let navigaions=useNavigate()
@@ -13,7 +14,7 @@ function ViewallCategary() {
   const fetchAllCategaryFunc = async () => {
     try {
       let token = localStorage.getItem('access');    
-      let fetchcategories = await axios.get('http://127.0.0.1:8000/adminside/GetallCategory/', {
+      let fetchcategories = await axios.get(`${apiUrl}/adminside/GetallCategory/`, {
         headers: {
           Authorization: `Bearer ${token}`
         },
@@ -28,7 +29,7 @@ function ViewallCategary() {
 let deleteCategary=async(id)=>{
   let token=localStorage.getItem('access')
   try{
-    await axios.delete(`http://127.0.0.1:8000/adminside/DeleteCategory/${id}/`,{
+    await axios.delete(`${apiUrl}/adminside/DeleteCategory/${id}/`,{
       headers:{
         Authorization:`Bearer ${token}`
       }

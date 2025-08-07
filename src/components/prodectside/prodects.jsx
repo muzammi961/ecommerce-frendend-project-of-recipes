@@ -3,6 +3,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import bgimage from "../../assets/backgroundImage.jpg";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function ProductData() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function ProductData() {
 let getcategoryfunc=async()=>{
     try{
       let token=localStorage.getItem('access')
-      let getcat=await axios.get('http://127.0.0.1:8000/products/GetallCategory/',{
+      let getcat=await axios.get(`${apiUrl}/products/GetallCategory/`,{
         headers:{
           Authorization:`Bearer ${token}`
         }
@@ -39,7 +40,7 @@ let getcategoryfunc=async()=>{
     setCategoryName(category);
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/products/ViewProductsByCategory/${category}/`,{headers: {Authorization: `Bearer ${token}`,},
+      const response = await axios.get(`${apiUrl}/products/ViewProductsByCategory/${category}/`,{headers: {Authorization: `Bearer ${token}`,},
         }
       );
       setProducts(response.data);
@@ -73,7 +74,7 @@ let getcategoryfunc=async()=>{
         quantity: 1,
       };
       await axios.post(
-        "http://127.0.0.1:8000/cart/AddProductCart/",
+        `${apiUrl}/cart/AddProductCart/`,
         postValue,
         {
           headers: {
@@ -91,7 +92,7 @@ let getcategoryfunc=async()=>{
   const addToWishlist = async (productId) => {
     try {
       await axios.post(
-        "http://127.0.0.1:8000/cart/AddProductWishlist/",
+        `${apiUrl}/cart/AddProductWishlist/`,
         { product: productId },
         {
           headers: {
@@ -111,7 +112,7 @@ let getcategoryfunc=async()=>{
     let token=localStorage.getItem('access')
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/orders/UseraddressGet",
+        `${apiUrl}/orders/UseraddressGet`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -124,7 +125,7 @@ let getcategoryfunc=async()=>{
               product: productId,
                quantity: 1,
               };
-              await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+              await axios.post(`${apiUrl}/cart/AddProductCart/`,postValue,{headers: {Authorization: `Bearer ${token}`,},});
               toast.success("Added to cart!");
             } catch (e) {
               console.error("Error adding to cart:", e.message);
@@ -139,7 +140,7 @@ let getcategoryfunc=async()=>{
         product: productId,
         quantity: 1,
       };
-      await axios.post("http://127.0.0.1:8000/cart/AddProductCart/",postValue,{headers: {Authorization: `Bearer ${token}`,},});
+      await axios.post(`${apiUrl}/cart/AddProductCart/`,postValue,{headers: {Authorization: `Bearer ${token}`,},});
       toast.success("Added to cart!");
     } catch (e) {
       console.error("Error adding to cart:", e.message);

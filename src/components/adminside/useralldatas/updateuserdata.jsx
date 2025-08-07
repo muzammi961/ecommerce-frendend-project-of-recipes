@@ -4,6 +4,7 @@ import axios from "axios";
 import toast,{Toaster} from "react-hot-toast";
 import AdminSidebar from '../../ad/sidebar'
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 function UpdateUserData(){
   let {userid}=useParams()
   let navigation=useNavigate()
@@ -17,7 +18,7 @@ let savebuttonforupdatedata=async(e)=>{
    }
    let token=localStorage.getItem('access')
   try{
-    await axios.put(`http://127.0.0.1:8000/adminside/Updateuserdata/${userid}/`,{username:user.username,email:user.email},{
+    await axios.put(`${apiUrl}/adminside/Updateuserdata/${userid}/`,{username:user.username,email:user.email},{
     headers:{
         Authorization:`Bearer ${token}`
     }

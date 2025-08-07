@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from '../../ad/sidebar';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function ViewallProductByCategory() {
   const [categories, setCategories] = useState([]);
@@ -18,7 +19,7 @@ function ViewallProductByCategory() {
   const deletproduct = async (id) => {
     let token = localStorage.getItem('access');
     try {
-      await axios.delete(`http://127.0.0.1:8000/adminside/DeleteaProduct/${id}/`, {
+      await axios.delete(`${apiUrl}/adminside/DeleteaProduct/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Product deleted successfully!');
@@ -31,7 +32,7 @@ function ViewallProductByCategory() {
   const fetchCategories = async () => {
     try {
       const token = localStorage.getItem("access");
-      const response = await axios.get("http://127.0.0.1:8000/adminside/GetallCategory/", {
+      const response = await axios.get(`${apiUrl}/adminside/GetallCategory/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(response.data);
@@ -45,7 +46,7 @@ function ViewallProductByCategory() {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.get(
-        `http://127.0.0.1:8000/adminside/ViewAllProductbyCategory/${categoryname}/`,
+        `${apiUrl}/adminside/ViewAllProductbyCategory/${categoryname}/`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setProducts(response.data);

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import AdminSidebar  from '../../ad/sidebar'
+const apiUrl = import.meta.env.VITE_API_URL;
 export default function AddProduct() {
   const [form, setForm] = useState({productname: '',price: '',offer_price: '',item_photo: null,category_id: '',});
 
@@ -14,7 +15,7 @@ export default function AddProduct() {
   const getallcategory = async () => {
     let token = localStorage.getItem('access');
     try {
-      let caturl = await axios.get('http://127.0.0.1:8000/adminside/GetallCategory/', {
+      let caturl = await axios.get(`${apiUrl}/adminside/GetallCategory/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategory(caturl.data);
@@ -41,7 +42,7 @@ export default function AddProduct() {
 
     try {
     
-      const res = await axios.post('http://127.0.0.1:8000/adminside/CreateProduct/', formData, {
+      const res = await axios.post(`${apiUrl}/adminside/CreateProduct/`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

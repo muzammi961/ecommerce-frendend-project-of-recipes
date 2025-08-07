@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import toast,{ Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_URL;
 function UpdateCategory() {
   // Sample category data - replace with your actual data
 
@@ -32,7 +33,7 @@ let updatecategary=async(e)=>{
   let token=localStorage.getItem('access')
   console.log('hiii for up',catid,state)
   try{
-    await axios.put(`http://127.0.0.1:8000/adminside/UpdateCategory/${catid}/`,{name:state},{
+    await axios.put(`${apiUrl}/adminside/UpdateCategory/${catid}/`,{name:state},{
       headers:{
         Authorization:`Bearer ${token}`
       }

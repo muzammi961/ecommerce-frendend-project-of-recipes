@@ -1,5 +1,5 @@
 import './style/registerpage.css'
-import hotellogo from '../../assets/hotellogo.jpg'
+import hotellogo from '../../assets/hotellogo.png'
 import  toast,{Toaster} from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios  from 'axios';
@@ -7,6 +7,7 @@ import { act, useRef } from 'react';
 import { useState } from 'react';
 import { useReducer } from 'react';
 import { redirect } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 function Loginpage(){
 let reducer=(state,action)=>{
   return {...state,[action.name]:action.value}
@@ -15,7 +16,7 @@ let navigation=useNavigate()
 let  subfunc= async(e)=>{
   e.preventDefault()
 try{
-  let validateddata =await axios.post('http://127.0.0.1:8000/authentication/UserLogin/',state)
+  let validateddata =await axios.post(`${apiUrl}/authentication/UserLogin/`,state)
   localStorage.setItem('access',validateddata.data.access)
   localStorage.setItem('refresh',validateddata.data.refresh)
   let userforcheck=validateddata.data

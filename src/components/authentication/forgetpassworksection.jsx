@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-
+const apiUrl = import.meta.env.VITE_API_URL;
 export default function ForgetPassword() {
   let navigation=useNavigate()
   const [step, setStep] = useState('request'); 
@@ -32,7 +32,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
     if (step === 'request') {
       try{
        console.log('email is....',form.email)                                                    
-      await axios.post('http://127.0.0.1:8000/authentication/PasswordResetRequest/',{ email: form.email })
+      await axios.post(`${apiUrl}/authentication/PasswordResetRequest/`,{ email: form.email })
        toast.success('OTP sent to email.');
        console.log('thiis is otp func')
        setStep('verify');
@@ -42,7 +42,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
     } else if (step === 'verify') {
      try{
       console.log('email and otp  ...',form.email,form.otp)
-      await axios.post('http://127.0.0.1:8000/authentication/OTPVerificationView/',{email:form.email,otp:form.otp})
+      await axios.post(`${apiUrl}/authentication/OTPVerificationView/`,{email:form.email,otp:form.otp})
      }catch(e){
       toast.error('error sending otp..')
       setStep('verify')
@@ -62,7 +62,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
        setStep('reset')
        return
       }          
-      await axios.post('http://127.0.0.1:8000/authentication/PasswordResetView/',{email:form.email,password:form.password,conform_password:form.confirmpassword})
+      await axios.post(`${apiUrl}/authentication/PasswordResetView/`,{email:form.email,password:form.password,conform_password:form.confirmpassword})
     toast.success('Password reset successful!');
     navigation('/loginpage')
     }catch(e){
@@ -214,7 +214,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
       <div className="text-center pt-2">
         <button 
           type="button" 
-          onClick={() => navigate('/login')}
+          onClick={() => navigation('/loginpage')}
           className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center justify-center w-full"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
