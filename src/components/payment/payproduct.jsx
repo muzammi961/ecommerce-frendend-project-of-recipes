@@ -140,7 +140,7 @@ function PayProduct() {
         {cartid !== "0" ? (
           <>
             <img
-              src={`http://127.0.0.1:8000${product?.item_photo || ""}`}
+              src={`${apiUrl}${product?.item_photo || ""}`}
               alt={product?.productname}
               className="w-20 h-20 bg-gray-200 rounded-md mr-4"
             />

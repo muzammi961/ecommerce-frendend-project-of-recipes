@@ -65,7 +65,7 @@ function Seeproducts() {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img 
-                    src={`http://127.0.0.1:8000${product.item_photo}`} 
+                    src={`${apiUrl}${product.item_photo}`} 
                     alt={product.productname}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />

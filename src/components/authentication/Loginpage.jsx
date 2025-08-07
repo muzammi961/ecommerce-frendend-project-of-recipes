@@ -1,12 +1,12 @@
 import './style/registerpage.css'
-import hotellogo from '../../assets/hotellogo.png'
+// import hotellogo from '../../assets/hotellogo.png'
 import  toast,{Toaster} from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios  from 'axios';
-import { act, useRef } from 'react';
-import { useState } from 'react';
+// import { act, useRef } from 'react';
+// import { useState } from 'react';
 import { useReducer } from 'react';
-import { redirect } from 'react-router-dom';
+// import { redirect } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
 function Loginpage(){
 let reducer=(state,action)=>{

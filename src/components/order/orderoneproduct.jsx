@@ -96,7 +96,7 @@ let paymentbutton=()=>{
               <div className="flex flex-col md:flex-row items-start gap-6 pb-6 mb-6 border-b border-amber-100">
                 <div className="relative">
                   <img
-                     src={cartid !== "0" ? `http://127.0.0.1:8000${product?.item_photo || ""}` : ""}
+                     src={cartid !== "0" ? `${apiUrl}${product?.item_photo || ""}` : ""}
                     alt={product?.productname || "No Product"}
                      className="w-32 h-32 object-cover rounded-xl border-2 border-white shadow-lg"
                     />

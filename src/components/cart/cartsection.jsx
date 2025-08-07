@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import bgimage from '../../assets/backgroundImage.jpg';
+// import bgimage from '../../assets/backgroundImage.jpg';
 import toast, { Toaster } from 'react-hot-toast';
-import Ordersection from '../order/ordersection';
+// import Ordersection from '../order/ordersection';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function Cartsection() {
@@ -136,7 +136,7 @@ const [selectedProduct, setSelectedProduct] = useState(null);
           <div className="md:flex">
             <div className="md:w-1/2 p-8">
               <img 
-                src={`http://127.0.0.1:8000${selectedProduct.item_photo}`} 
+                src={`${apiUrl}${selectedProduct.item_photo}`} 
                 alt={selectedProduct.productname} 
                 className="w-full h-96 object-contain rounded-lg"
               />
@@ -218,7 +218,7 @@ const [selectedProduct, setSelectedProduct] = useState(null);
                 onClick={() => setSelectedProduct(item.product)}
               >
                 <img 
-                  src={`http://127.0.0.1:8000${item.product.item_photo}`} 
+                  src={`${apiUrl}${item.product.item_photo}`} 
                   alt={item.product.productname} 
                   className="w-full sm:w-48 h-48 object-contain rounded-lg"
                 />

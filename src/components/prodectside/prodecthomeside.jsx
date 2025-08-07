@@ -138,7 +138,7 @@ return (
             <div className="md:flex">
               <div className="md:w-1/2 p-8">
                 <img 
-                  src={`http://127.0.0.1:8000${selectedProduct.item_photo}`} 
+                  src={`${apiUrl}${selectedProduct.item_photo}`} 
                   alt={selectedProduct.productname} 
                   className="w-full h-96 object-contain rounded-lg"
                   onError={(e) => {
@@ -309,7 +309,7 @@ return (
               >
                 <div  onClick={() => setSelectedProduct(product)} className="relative h-72 overflow-hidden">
                   <img 
-                    src={`http://127.0.0.1:8000${product.item_photo}`} 
+                    src={`${apiUrl}${product.item_photo}`} 
                     alt={product.productname} 
                     className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                     onError={(e) => {

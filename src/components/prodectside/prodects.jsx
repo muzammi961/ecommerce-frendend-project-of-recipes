@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import bgimage from "../../assets/backgroundImage.jpg";
+// import bgimage from "../../assets/backgroundImage.jpg";
 import { useNavigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -197,7 +197,7 @@ return (
             <div className="md:flex">
               <div className="md:w-1/2 p-8">
                 <img 
-                  src={`http://127.0.0.1:8000${selectedProduct.item_photo}`} 
+                  src={`${apiUrl}${selectedProduct.item_photo}`} 
                   alt={selectedProduct.productname} 
                   className="w-full h-96 object-contain rounded-lg"
                   onError={(e) => {
@@ -355,7 +355,7 @@ return (
               (item, index) => (
                 <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div  onClick={() => setSelectedProduct(item)} className="relative h-48 overflow-hidden group">
-                    <img src={`http://127.0.0.1:8000${item.item_photo}`} alt={item.productname} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onError={(e) => {e.target.onerror = null; e.target.src = "https://via.placeholder.com/300x200?text=Food+Image";}}/>
+                    <img src={`${apiUrl}${item.item_photo}`} alt={item.productname} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onError={(e) => {e.target.onerror = null; e.target.src = "https://via.placeholder.com/300x200?text=Food+Image";}}/>
                     {item.offer_price && (
                       <div className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-md">
                         {Math.round(((item.price - item.offer_price) / item.price) * 100)}% OFF</div>

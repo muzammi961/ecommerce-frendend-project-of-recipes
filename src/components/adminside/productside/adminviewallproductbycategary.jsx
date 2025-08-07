@@ -124,7 +124,7 @@ function ViewallProductByCategory() {
                   <div key={product.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
                     <div className="relative h-48 overflow-hidden">
                       <img 
-                        src={`http://127.0.0.1:8000${product.item_photo}`} 
+                        src={`${apiUrl}${product.item_photo}`} 
                         alt={product.productname}
                         className="w-full h-full object-cover"
                       />

@@ -133,7 +133,7 @@ function Wishlist() {
                 {/* Product Image */}
                 <div className="relative h-48 overflow-hidden group">
                   <img
-                    src={`http://127.0.0.1:8000${element.product.item_photo}`}
+                    src={`${apiUrl}${element.product.item_photo}`}
                     alt={element.product.productname}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />

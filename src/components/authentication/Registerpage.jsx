@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import hotellogo from '../../assets/hotellogo.png'
-import { useRef } from 'react';
-import { useState } from 'react';
+// import { useRef } from 'react';
+// import { useState } from 'react';
 import { useReducer } from 'react';
 const apiUrl = import.meta.env.VITE_API_URL;
 function Auth(){

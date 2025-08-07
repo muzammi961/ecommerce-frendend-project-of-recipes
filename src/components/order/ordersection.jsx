@@ -94,7 +94,7 @@ let totalprice=orderproduct.reduce((acc,item)=>acc + item.product.offer_price*it
                 <div className="absolute inset-0 bg-amber-400/10 rounded-lg group-hover:opacity-30 transition-opacity duration-300"></div>
                 <img 
                   className="w-24 h-24 object-cover rounded-lg border border-amber-200/20 shadow-md"
-                  src={`http://127.0.0.1:8000${element.product.item_photo}`} 
+                  src={`${apiUrl}${element.product.item_photo}`} 
                   alt={element.product.productname} 
                 />
               </div>

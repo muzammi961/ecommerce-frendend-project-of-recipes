@@ -1,6 +1,6 @@
 import './style/registerpage.css'
-import hotellogo from '../../assets/hotellogo.png'
-import { useRef } from 'react';
+// import hotellogo from '../../assets/hotellogo.png'
+// import { useRef } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import toast,{Toaster} from 'react-hot-toast';
