@@ -18,6 +18,10 @@ let Logoutfunc=async()=>{
     
     }
 
+let onClose=()=>{
+  navigation('/prodectdata')
+}    
+
 
 
     return(<>
@@ -55,7 +59,7 @@ let Logoutfunc=async()=>{
       </button>
       
       <button
-        // onClick={onClose}
+        onClick={onClose}
         className="flex-1 py-3 bg-white text-gray-700 font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-all duration-300 shadow hover:shadow-gray-200/50 flex items-center justify-center"
       >
         <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

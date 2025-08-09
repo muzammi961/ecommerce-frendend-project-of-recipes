@@ -76,7 +76,7 @@ let updatenav=(catid)=>{
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-100 to-indigo-100 flex items-center justify-center mr-4">
                     <span className="text-xl">📁</span>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800">{cat.name}</h3>
+                  <h3 className="text-xl font-semibold text-gray-800">{cat.name} <br />ID {cat.id}</h3>
                 </div>
                 
                 <p className="text-gray-600 mb-6">{cat.description || "No description available"}</p>

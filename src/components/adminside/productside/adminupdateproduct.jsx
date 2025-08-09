@@ -53,6 +53,7 @@ function UpdateProducts() {
   };
 
   const updateProduct = async (e) => {
+    console.log('product image ',productdatas.item_photo)
     e.preventDefault();
     const token = localStorage.getItem("access");
     const formData = new FormData();
@@ -67,13 +68,11 @@ function UpdateProducts() {
     }
 
     try {
-      await axios.put(
-        `${apiUrl}/adminside/UpdateProductView/${update_id}/`,
-        formData,
-        {
+      console.log('alll data s ....',formData)
+      await axios.put(`${apiUrl}/adminside/UpdateProductView/${update_id}/`,formData,{
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data",
           },
         }
       );

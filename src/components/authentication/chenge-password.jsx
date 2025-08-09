@@ -64,7 +64,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
           <div className="absolute -inset-0.5 bg-blue-300/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <div className="relative bg-white rounded-lg">
             <input
-               onChange={(e) => setData({ ...state, currentpass: e.target.value })}
+              onChange={(e) => setData({ ...state, currentpass: e.target.value })}
               type="password"
               className="peer w-full px-4 py-3 border-0 bg-white/50 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition duration-200"
               placeholder=" "
@@ -91,7 +91,7 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
           </div>
         </div>
 
-        {/* Confirm Password */}
+     
         <div className="relative group">
           <div className="absolute -inset-0.5 bg-blue-300/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <div className="relative bg-white rounded-lg">
@@ -138,22 +138,36 @@ const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
         </ul>
       </div>
 
-      {/* Submit Button */}
-      <button
-        onClick={changepassFunc}
-        type="button"
-        className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-blue-300/50 flex items-center justify-center"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-        </svg>
-        Update Password
-      </button>
+
+      <div className="flex flex-col sm:flex-row gap-3">
+   
+        <button
+          onClick={() => window.history.back()} 
+          type="button"
+          className="w-full py-3 bg-white text-gray-600 font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-gray-200/50 flex items-center justify-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Go Back
+        </button>
+        
+        {/* Submit Button */}
+        <button
+          onClick={changepassFunc}
+          type="button"
+          className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-blue-300/50 flex items-center justify-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+          </svg>
+          Update Password
+        </button>
+      </div>
     </div>
   </div>
   <Toaster position='bottom-right'/>
 </div>
-
   );
 }
 export default Chengepassword;

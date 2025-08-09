@@ -4,6 +4,8 @@ import toast,{Toaster} from 'react-hot-toast';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
+import  DecodeImageUrl  from "../../utils/decordeurl";
+
 
 const OrderDetail = () => {
 let navigation=useNavigate()
@@ -63,7 +65,7 @@ let backbuttonfunc=()=>{
           {statedata.map((element,index) => (
             <div key={index.id} className="bg-gradient-to-r from-amber-50 to-white rounded-xl p-5 shadow-md border border-amber-100 hover:shadow-lg transition-shadow">
               <div className="flex flex-col md:flex-row gap-6">
-                <img className="w-full md:w-24 h-24 rounded-lg bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center shadow-inner text-4xl"  src={`http://127.0.0.1:8000${element.product.item_photo}`}  alt={element.product.productname}/>
+                <img className="w-full md:w-24 h-24 rounded-lg bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center shadow-inner text-4xl"  src={DecodeImageUrl(element.product.item_photo)}  alt={element.product.productname}/>
                 
                 
                 {/* Product details */}

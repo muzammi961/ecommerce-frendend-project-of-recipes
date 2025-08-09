@@ -5,9 +5,11 @@ import toast,{Toaster} from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { useEffect,useState,useReducer } from 'react';
 const apiUrl = import.meta.env.VITE_API_URL;
+import  DecodeImageUrl  from "../../../utils/decordeurl";
+
 function OrderDetailsAdmin() {
   let [orderdata,setOrderdata]=useState([])
-  let [totalprice,setTotalprice]=useState('')
+  // let [totalprice,setTotalprice]=useState('')
   let [address,setAddress]=useState([])
   let {userid}=useParams()
 
@@ -74,11 +76,7 @@ let userAddress=async()=>{
 }
 
 
-
-
-
-
-
+let totalprice=orderdata.reduce((acc,item)=>acc + item.product.offer_price*item.quantity,0 )
 
   return (
   <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -95,24 +93,6 @@ let userAddress=async()=>{
 
       {orderdata && orderdata.length > 0 ? (
         <>
-          {/* <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div className="space-y-2">
-                  <div className="flex items-center">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium`}></span>
-                    <span className="ml-4 text-gray-500">order.date</span>
-                  </div>
-                  <h2 className="text-xl font-bold text-gray-800">Total: order.total</h2>
-                  <p className="text-gray-600">Payment Method: Credit Card</p>
-                </div>
-                <button className="mt-4 md:mt-0 px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all duration-200">
-                  Update Status
-                </button>
-              </div>
-            </div>
-          </div> */}
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Order Items */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
@@ -124,7 +104,7 @@ let userAddress=async()=>{
                   <div className="p-4 flex items-center hover:bg-gray-50 transition-colors">
                     <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
                       <img 
-                        src={`http://127.0.0.1:8000${item.product.item_photo}`} 
+                        src={DecodeImageUrl(item.product.item_photo)} 
                         alt={item.name} 
                         className="w-full h-full object-cover"
                       />
@@ -134,7 +114,8 @@ let userAddress=async()=>{
                       <p className="text-gray-600">Quantity: {item.quantity}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium text-gray-800">{item.product.offer_price}</p>
+                      <p className="font-medium text-gray-800">Price: {item.product.offer_price}</p>
+                      <p className="font-medium text-gray-800">Total: {item.product.offer_price*item.quantity}</p>
                     </div>
                   </div>
                 ))}

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import toast,{ Toaster } from 'react-hot-toast';
 const apiUrl = import.meta.env.VITE_API_URL;
 
+
 const ViewallUser = () => {
   let navigation=useNavigate()
   const [users, setUsers] = useState([]);
@@ -73,7 +74,7 @@ let updateuserdatafunc=(userid)=>{
 let userdatadestroyfunc=async(id)=>{
   let token=localStorage.getItem('access')
   try{
-   await axios.delete(`http://127.0.0.1:8000/adminside/Deleteuserdata/${id}/`,{
+   await axios.delete(`${apiUrl}/adminside/Deleteuserdata/${id}/`,{
     headers:{
       Authorization:`Bearer ${token}`
     }

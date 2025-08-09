@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from '../../ad/sidebar';
 const apiUrl = import.meta.env.VITE_API_URL;
+import  DecodeImageUrl  from "../../../utils/decordeurl";
 
 function ViewallProductByCategory() {
   const [categories, setCategories] = useState([]);
@@ -13,7 +14,7 @@ function ViewallProductByCategory() {
 
   useEffect(() => {
     fetchCategories();
-    fetchProducts();
+    // fetchProducts();
   }, []);
 
   const deletproduct = async (id) => {
@@ -124,7 +125,7 @@ function ViewallProductByCategory() {
                   <div key={product.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
                     <div className="relative h-48 overflow-hidden">
                       <img 
-                        src={`${apiUrl}${product.item_photo}`} 
+                        src={DecodeImageUrl(product.item_photo)} 
                         alt={product.productname}
                         className="w-full h-full object-cover"
                       />

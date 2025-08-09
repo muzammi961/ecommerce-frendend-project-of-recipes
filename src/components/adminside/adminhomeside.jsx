@@ -133,15 +133,15 @@ const dashboarddatas = async () => {
             {dashdata.map((stat, index) => (
               <div 
                 key={index} 
-                className={`bg-gradient-to-r ${stat.color} rounded-xl shadow-lg p-6 text-white transform hover:scale-[1.02] transition-all duration-300 hover:shadow-xl`}
+                className={`bg-gradient-to-r ${stat.color}  rounded-xl shadow-lg p-6 text-white transform hover:scale-[1.02] transition-all duration-300 hover:shadow-xl`}
               >
                 <div className="flex items-start">
                   <div className="p-3 rounded-full bg-white bg-opacity-20 mr-4 text-xl backdrop-blur-sm">
                     {stat.icon}
                   </div>
                   <div>
-                    <p className="text-sm text-white text-opacity-80">{stat.title}</p>
-                    <p className="text-2xl font-bold">{stat.value}</p>
+                    <p className="text-sm text-black text-opacity-80">{stat.title}</p>
+                    <p className="text-2xl text-black font-bold">{stat.value}</p>
                     <p className="text-sm mt-1 text-white text-opacity-90 flex items-center">
                     </p>
                   </div>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import toast,{ Toaster } from 'react-hot-toast';
 import AdminSidebar from '../../ad/sidebar';
 const apiUrl = import.meta.env.VITE_API_URL;
-
+import  DecodeImageUrl  from "../../../utils/decordeurl";
 function Seeproducts() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -15,10 +15,12 @@ function Seeproducts() {
   }, []);
 
   const getProductsData = async () => {
+    const token = localStorage.getItem('access');
     try {
       const response = await axios.get(`${apiUrl}/adminside/GetallProducts/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      // console.log('imagee ....',response.data[6].item_photo,'image name is ',response.data[6].productname)
       setProducts(response.data);
     } catch (error) {
       console.error('Failed to fetch products:', error);
@@ -30,6 +32,7 @@ function Seeproducts() {
   };
 
   const deleteProduct = async (productId) => {
+     const token = localStorage.getItem('access');
     try {
       await axios.delete(`${apiUrl}/adminside/DeleteaProduct/${productId}/`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -65,8 +68,8 @@ function Seeproducts() {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img 
-                    src={`${apiUrl}${product.item_photo}`} 
-                    alt={product.productname}
+                    src={DecodeImageUrl(product.item_photo)}
+                    alt={`${product.item_photo}`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">

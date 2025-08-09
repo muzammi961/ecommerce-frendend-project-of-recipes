@@ -5,6 +5,7 @@ import bgimage from '../../assets/backgroundImage.jpg';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
+import  DecodeImageUrl  from "../../utils/decordeurl";
 
 function Wishlist() {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,8 @@ function Wishlist() {
   const navigate = useNavigate();
 
   useEffect(() => {
+     sessionStorage.setItem("itemquantitybull",1); 
+     sessionStorage.setItem("cartitembull", "false");
     const fetchWishlist = async () => {
       try {
         const response = await axios.get(`${apiUrl}/cart/WishListViewByUser/`, {
@@ -100,12 +103,26 @@ function Wishlist() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Header with gradient */}
+         
         <div className="mb-8">
+           <button
+        onClick={() => window.history.back()} // or your custom navigation function
+        className="group relative overflow-hidden bg-gradient-to-r from-amber-100 to-amber-50 hover:from-amber-200 hover:to-amber-100 px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 flex items-center border border-amber-200"
+      >
+        <span className="absolute inset-0 w-2 bg-amber-400 transition-all duration-300 ease-out group-hover:w-full"></span>
+        <span className="relative flex items-center text-amber-700 group-hover:text-amber-800 font-medium text-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+          </svg>
+          Back
+        </span>
+      </button>
           <h2 className="text-3xl font-bold text-white drop-shadow-md mb-2">Your Wishlist</h2>
           <p className="text-amber-100 font-medium">
             {products.length} {products.length === 1 ? 'item' : 'items'} saved
           </p>
         </div>
+        
 
         {products.length === 0 ? (
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 text-center shadow-xl">
@@ -117,7 +134,7 @@ function Wishlist() {
             <h3 className="text-xl font-bold text-gray-800 mb-2">Your wishlist is empty</h3>
             <p className="text-gray-600 mb-4">Save your favorite items to see them here</p>
             <button 
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/prodectdata')}
               className="px-6 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all shadow-md"
             >
               Browse Products
@@ -133,7 +150,7 @@ function Wishlist() {
                 {/* Product Image */}
                 <div className="relative h-48 overflow-hidden group">
                   <img
-                    src={`${apiUrl}${element.product.item_photo}`}
+                    src={DecodeImageUrl(element.product.item_photo)}
                     alt={element.product.productname}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
