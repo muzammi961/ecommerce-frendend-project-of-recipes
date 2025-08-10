@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import bgimage from '../../assets/backgroundImage.jpg';
+// import bgimage from '../../assets/backgroundImage.jpg';
 
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -94,13 +94,14 @@ function Wishlist() {
   };
 
   return (
-    <div 
-      className="min-h-screen bg-fixed bg-cover bg-center p-6"
-      style={{ 
-        backgroundImage: `url(${bgimage})`,
-        backdropFilter: 'blur(4px)'
-      }}
-    >
+<div
+  className="min-h-screen bg-fixed bg-cover bg-center p-6"
+  style={{
+    backgroundColor: "rgba(255, 255, 0, 0.4)",  // Yellow with 40% opacity
+    backdropFilter: "blur(4px)",
+    WebkitBackdropFilter: "blur(4px)"           // Cross-browser support
+  }}
+>
       <div className="max-w-7xl mx-auto">
         {/* Header with gradient */}
          
@@ -118,7 +119,7 @@ function Wishlist() {
         </span>
       </button>
           <h2 className="text-3xl font-bold text-white drop-shadow-md mb-2">Your Wishlist</h2>
-          <p className="text-amber-100 font-medium">
+          <p className="text-black font-medium">
             {products.length} {products.length === 1 ? 'item' : 'items'} saved
           </p>
         </div>
