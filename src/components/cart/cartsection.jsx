@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import bgimage from '../../assets/backgroundImage.jpg';
 import toast, { Toaster } from 'react-hot-toast';
-// import Ordersection from '../order/ordersection';
 const apiUrl = import.meta.env.VITE_API_URL;
 import  DecodeImageUrl  from "../../utils/decordeurl";
 
