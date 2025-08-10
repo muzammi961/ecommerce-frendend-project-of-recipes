@@ -90,7 +90,7 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
                <h1 className='justify-center flex text-white text-bold sm:text-4xl'>Registration page</h1>
 
             <input name='name' onChange={(e) => dispatch({ name:'username', value: e.target.value })}  type="text" placeholder="Enter your name :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
-            <input  name='number'  onChange={(e) => dispatch({ name:'email', value: e.target.value })} type="text" placeholder="Enter your phone email :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
+            <input  name='number'  onChange={(e) => dispatch({ name:'email', value: e.target.value })} type="text" placeholder="Enter your email :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
             <input  name='password' onChange={(e) => dispatch({ name:'password', value: e.target.value })} type="password" placeholder="Enter your password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
             <input  name='confirmpassword' onChange={(e) => dispatch({ name:'password_two', value: e.target.value })} type="password" placeholder="Confirm your password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
 
