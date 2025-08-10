@@ -24,7 +24,7 @@ import ViewallCategary from './components/adminside/categaryside/viewallcategary
 import OrderOneProduct from './components/order/orderoneproduct'
 import OrderDetailsAdmin from './components/adminside/useralldatas/userSpecificdetails'
 import PayProduct from './components/payment/payproduct'
-import RazorpayButton from './components/payment/razorpaysection'
+// import RazorpayButton from './components/payment/razorpaysection'
 import OrderDetail from './components/order/orderdetail'
 import Addcategary from './components/adminside/categaryside/addcategary'
 
@@ -57,7 +57,7 @@ function App() {
  <Route path='OrderDetail/' element={<OrderDetail/>}/>
 
 <Route path='PayProduct/:cartid'element={<PayProduct/>}/>
-<Route path='RazorpayButton/' element={<RazorpayButton/>}/>
+{/* <Route path='RazorpayButton/' element={<RazorpayButton/>}/> */}
 
 
 

@@ -38,7 +38,7 @@ let onClose=()=>{
           </svg>
         </div>
       </div>
-      <h1 className="text-center text-3xl font-bold text-gray-800 bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
+      <h1 className="text-center text-3xl font-bold text-gray-800 bg-gradient-to-r from-red-500 to-red-600 bg-clip-text ">
         Ready to Leave?
       </h1>
       <p className="text-center text-red-600/80 mt-2">

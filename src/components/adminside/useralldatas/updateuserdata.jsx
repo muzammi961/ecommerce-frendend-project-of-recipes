@@ -50,7 +50,7 @@ toast.error('you could not update the user data.....!')
             <form className="space-y-6">
               {/* Username Field */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700 flex items-center">
+                <label className="block text-sm font-medium text-gray-700  items-center">
                   <span className="bg-blue-100 p-2 rounded-full mr-3 text-blue-600">👤</span>
                   Username <span>  ::       {userid}</span>
                 </label>
@@ -65,7 +65,7 @@ toast.error('you could not update the user data.....!')
               
      
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700 flex items-center">
+                <label className="block text-sm font-medium text-gray-700  items-center">
                   <span className="bg-indigo-100 p-2 rounded-full mr-3 text-indigo-600">✉️</span>
                   Email
                 </label>
