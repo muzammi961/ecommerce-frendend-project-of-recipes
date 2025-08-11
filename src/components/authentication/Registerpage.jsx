@@ -89,10 +89,10 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
           <form onSubmit={subfunc} className="flex flex-col p-8 rounded-lg gap-4 w-full bg-white/30 border border-white">
                <h1 className='justify-center flex text-white text-bold sm:text-4xl'>Registration page</h1>
 
-            <input name='name' onChange={(e) => dispatch({ name:'username', value: e.target.value })}  type="text" placeholder="Enter your name :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
-            <input  name='number'  onChange={(e) => dispatch({ name:'email', value: e.target.value })} type="text" placeholder="Enter your email :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
-            <input  name='password' onChange={(e) => dispatch({ name:'password', value: e.target.value })} type="password" placeholder="Enter your password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
-            <input  name='confirmpassword' onChange={(e) => dispatch({ name:'password_two', value: e.target.value })} type="password" placeholder="Confirm your password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
+            <input name='name' onChange={(e) => dispatch({ name:'username', value: e.target.value })}  type="text" placeholder="Name :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
+            <input  name='number'  onChange={(e) => dispatch({ name:'email', value: e.target.value })} type="email" placeholder="Email :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
+            <input  name='password' onChange={(e) => dispatch({ name:'password', value: e.target.value })} type="password" placeholder="Password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
+            <input  name='confirmpassword' onChange={(e) => dispatch({ name:'password_two', value: e.target.value })} type="password" placeholder="Confirm password :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
 
             <div  className="text-white flex justify-around ">
               <button className='rounded px-4 py-2 backdrop-blur-3xl  hover:bg-black/40' type="submit">Submit</button>
