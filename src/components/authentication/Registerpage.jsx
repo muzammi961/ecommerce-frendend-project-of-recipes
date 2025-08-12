@@ -152,10 +152,7 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
         -webkit-appearance: none;
         border-radius: 8px;
       }
-      button {
-        min-height: 48px;
-        -webkit-appearance: none;
-      }
+ 
     }
     @media (max-width: 768px) {
       .backdrop-blur-lg { backdrop-filter: blur(12px); }
@@ -173,7 +170,6 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
     .animate-float { animation: float 6s ease-in-out infinite; }
     /* Custom scrollbar styling for other elements if needed */
     ::-webkit-scrollbar {
-      width: 6px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(255,255,255,0.1);
@@ -183,17 +179,8 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
       background: rgba(255,255,255,0.3);
       border-radius: 3px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.5);
-    }
-    input:focus:not(:focus-visible), button:focus:not(:focus-visible) {
-      outline: none !important;
-      box-shadow: none !important;
-    }
-    input:focus-visible, button:focus-visible {
-      outline: 2px solid rgba(59,130,246,0.5);
-      outline-offset: 2px;
-    }
+    
+ 
   `}</style>
 
     </div>

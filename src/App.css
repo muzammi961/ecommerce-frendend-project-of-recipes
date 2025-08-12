@@ -7,8 +7,5 @@
   scrollbar-width: none;     /* Firefox */
 }
 
-@layer base {
-  html, body {
-    @apply overflow-x-hidden;
-  }
-}
+
+
