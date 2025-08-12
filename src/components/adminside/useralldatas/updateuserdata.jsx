@@ -88,9 +88,11 @@ toast.error('you could not update the user data.....!')
             </button>
             <button
               type="button"
+              onClick={() => window.history.back()}
               className="flex-1 py-2 md:py-3 px-4 md:px-6 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
             >
               Cancel
+              
             </button>
           </div>
         </form>
