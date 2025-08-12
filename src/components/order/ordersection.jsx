@@ -99,52 +99,52 @@ let totalprice=orderproduct.reduce((acc,item)=>acc + item.product.offer_price*it
           </div>
 
           {/* Cart Items - Scrollable Area */}
-          <div className="divide-y divide-amber-100 max-h-[50vh] overflow-y-auto">
-            {orderproduct.length > 0 ? (
-              orderproduct.map((element, index) => (
-                <div 
-                  key={index} 
-                  className="p-3 sm:p-4 hover:bg-amber-50/50 transition-all duration-300 group"
-                >
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    {/* Product Image */}
-                    <div className="relative flex-shrink-0">
-                      <div className="absolute inset-0 bg-amber-200/20 rounded-lg group-hover:opacity-30 transition-opacity duration-300"></div>
-                      <img 
-                        className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover rounded-lg border border-amber-200 shadow-sm"
-                        src={DecodeImageUrl(element.product.item_photo)} 
-                        alt={element.product.productname} 
-                      />
-                    </div>
-                    
-                    {/* Product Details */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-amber-900 group-hover:text-amber-800 transition-colors truncate text-sm sm:text-base">
-                        {element.product.productname}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-amber-700/70">
-                        Qty: {element.quantity} × ₹{element.product.offer_price.toFixed(2)}
-                      </p>
-                    </div>
-                    
-                    {/* Product Price */}
-                    <div className="flex-shrink-0">
-                      <span className="text-base sm:text-lg font-bold text-amber-800">
-                        ₹{(element.quantity * element.product.offer_price).toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="p-6 sm:p-8 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-amber-300/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <p className="mt-3 sm:mt-4 text-amber-700/70 text-sm sm:text-base">Your cart is empty</p>
-              </div>
-            )}
+          <div className="divide-y divide-amber-100 max-h-[50vh] overflow-y-auto scrollbar-hide">
+  {orderproduct.length > 0 ? (
+    orderproduct.map((element, index) => (
+      <div 
+        key={index} 
+        className="p-3 sm:p-4 hover:bg-amber-50/50 transition-all duration-300 group"
+      >
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          {/* Product Image */}
+          <div className="relative flex-shrink-0">
+            <div className="absolute inset-0 bg-amber-200/20 rounded-lg group-hover:opacity-30 transition-opacity duration-300"></div>
+            <img 
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover rounded-lg border border-amber-200 shadow-sm"
+              src={DecodeImageUrl(element.product.item_photo)} 
+              alt={element.product.productname} 
+            />
           </div>
+          
+          {/* Product Details */}
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-amber-900 group-hover:text-amber-800 transition-colors truncate text-sm sm:text-base">
+              {element.product.productname}
+            </h3>
+            <p className="text-xs sm:text-sm text-amber-700/70">
+              Qty: {element.quantity} × ₹{element.product.offer_price.toFixed(2)}
+            </p>
+          </div>
+          
+          {/* Product Price */}
+          <div className="flex-shrink-0">
+            <span className="text-base sm:text-lg font-bold text-amber-800">
+              ₹{(element.quantity * element.product.offer_price).toFixed(2)}
+            </span>
+          </div>
+        </div>
+      </div>
+    ))
+  ) : (
+    <div className="p-6 sm:p-8 text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-amber-300/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+      <p className="mt-3 sm:mt-4 text-amber-700/70 text-sm sm:text-base">Your cart is empty</p>
+    </div>
+  )}
+</div>
 
           {/* Order Summary - Fixed at Bottom */}
           {orderproduct.length > 0 && (
