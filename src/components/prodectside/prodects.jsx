@@ -34,7 +34,7 @@ function ProductData() {
       console.log("mage is s  s ",DecodeImageUrl(response.data[4].item_photo))
     } catch (error) {
       console.error("Error fetching data", error);
-      toast.error("Failed to load products");
+      // toast.error("Failed to load products");
     } finally {
       setIsLoading(false);
     }
@@ -115,9 +115,12 @@ function ProductData() {
       });
       
       if (!response.data[0]?.nameofuser) {
-        toast.error("Please add your address first");
+        // toast.error("Please add your address first");
+        console.log('add your address first')
+
         try {
           await addToCart(productId); // Reuse addToCart function
+          toast.error("address section");
           navigate(`/Userformaddress/${productId}`);
         } catch (e) {
           console.error("Error:", e);
@@ -140,79 +143,91 @@ function ProductData() {
 
   if (selectedProduct) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white p-6">
-        <div className="max-w-6xl mx-auto">
-          <button 
-            onClick={() => setSelectedProduct(null)}
-            className="flex items-center text-amber-600 mb-6 hover:text-amber-800 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Back to Menu
-          </button>
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white p-4 sm:p-6">
+      <div className="max-w-6xl mx-auto">
+        <button 
+          onClick={() => setSelectedProduct(null)}
+          className="flex items-center text-amber-600 mb-4 sm:mb-6 hover:text-amber-800 transition"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+          </svg>
+          Back to Menu
+        </button>
 
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div className="md:flex">
-              <div className="md:w-1/2 p-8">
-                <img 
-                  // DecodeImageUrl(response.data[3].item_photo)
-                  src={DecodeImageUrl(selectedProduct.item_photo)}
-                  alt={selectedProduct.productname} 
-                  className="w-full h-96 object-contain rounded-lg"
-                  onError={handleImageError}
-                />
-              </div>
-              <div className="md:w-1/2 p-8">
-                <h1 className="text-3xl font-bold text-gray-800 mb-4">{selectedProduct.productname}</h1>
-                
-                <div className="flex items-center gap-4 mb-6">
-                  {selectedProduct.offer_price ? (
-                    <>
-                      <p className="text-2xl font-bold text-amber-600">₹{selectedProduct.offer_price}</p>
-                      <p className="line-through text-lg text-gray-400">₹{selectedProduct.price}</p>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
-                        {Math.round((1 - selectedProduct.offer_price/selectedProduct.price) * 100)}% OFF
-                      </span>
-                    </>
-                  ) : (
-                    <p className="text-2xl font-bold text-amber-600">₹{selectedProduct.price}</p>
-                  )}
-                </div>
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="md:flex">
+            {/* Product Image */}
+            <div className="md:w-1/2 p-4 sm:p-6 md:p-8">
+              <img 
+                src={DecodeImageUrl(selectedProduct.item_photo)}
+                alt={selectedProduct.productname} 
+                className="w-full h-64 sm:h-80 md:h-96 object-contain rounded-lg"
+                onError={handleImageError}
+              />
+            </div>
 
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">Description</h3>
-                  <p className="text-gray-600">
-                    {selectedProduct.description || "This delicious dish is prepared with the finest ingredients to give you an authentic taste experience."}
+            {/* Product Details */}
+            <div className="md:w-1/2 p-4 sm:p-6 md:p-8">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">
+                {selectedProduct.productname}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                {selectedProduct.offer_price ? (
+                  <>
+                    <p className="text-xl sm:text-2xl font-bold text-amber-600">
+                      ₹{selectedProduct.offer_price}
+                    </p>
+                    <p className="line-through text-base sm:text-lg text-gray-400">
+                      ₹{selectedProduct.price}
+                    </p>
+                    <span className="bg-green-100 text-green-800 text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
+                      {Math.round((1 - selectedProduct.offer_price/selectedProduct.price) * 100)}% OFF
+                    </span>
+                  </>
+                ) : (
+                  <p className="text-xl sm:text-2xl font-bold text-amber-600">
+                    ₹{selectedProduct.price}
                   </p>
-                </div>
+                )}
+              </div>
 
-                <div className="flex items-center gap-4 mb-8">
-                  <button 
-                    onClick={() => addToCart(selectedProduct.id)}
-                    className="flex-1 py-3 bg-amber-100 text-amber-800 rounded-full font-bold hover:bg-amber-200 transition shadow-md flex items-center justify-center gap-2"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Add to Cart
-                  </button>
-                  <button 
-                    onClick={() => addOrder(selectedProduct.id)}
-                    className="flex-1 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full font-bold hover:from-amber-600 hover:to-amber-700 transition shadow-md flex items-center justify-center gap-2"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                    Order Now
-                  </button>
-                </div>
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">
+                  Description
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  {selectedProduct.description || "This delicious dish is prepared with the finest ingredients to give you an authentic taste experience."}
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <button 
+                  onClick={() => addToCart(selectedProduct.id)}
+                  className="w-full sm:flex-1 py-2 sm:py-3 bg-amber-100 text-amber-800 rounded-full font-bold hover:bg-amber-200 transition shadow-md flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  Add to Cart
+                </button>
+                <button 
+                  onClick={() => addOrder(selectedProduct.id)}
+                  className="w-full sm:flex-1 py-2 sm:py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full font-bold hover:from-amber-600 hover:to-amber-700 transition shadow-md flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  Order Now
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <Toaster position="bottom-right" />
       </div>
+      <Toaster position="bottom-right" />
+    </div>
     );
   }
 
