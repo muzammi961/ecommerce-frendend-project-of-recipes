@@ -89,101 +89,120 @@ let userdatadestroyfunc=async(id)=>{
 
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <AdminSidebar />
-      
-      <div className="flex-1 p-8 overflow-y-auto">
-        <div className="max-w-7xl mx-auto">
-          {/* Shining Header */}
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-xl p-6 mb-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full transform -translate-x-16 translate-y-16"></div>
-            <h1 className="text-3xl font-bold text-white relative z-10">User Management</h1>
-            <p className="text-indigo-100 mt-2 relative z-10">Manage all registered users</p>
-          </div>
-
-          {/* Users Table */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-            <div className="overflow-x-auto">
-              <table className="min-w-full leading-normal">
-                <thead>
-                  <tr>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      ID
-                    </th>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Name
-                    </th>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Email
-                    </th>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Details
-                    </th>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-nowrap">{user.id}</p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-medium">
-                            {user.username.charAt(0).toUpperCase()}
-                          </div>
-                          <div className="ml-3">
-                            <p className="text-gray-900 whitespace-nowrap font-medium">
-                              {user.username}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-nowrap">{user.email}</p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button onClick={(e)=>userdetailfunc(user.id)} className="text-blue-600 hover:text-blue-800 mr-3 transition-colors border p-2 rounded-lg" >details</button>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span className={`px-2 py-1 text-xs rounded-full ${
-                          user.active111
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {user.active ? 'Active' : 'Inactive'}
-                        </span>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button onClick={()=>updateuserdatafunc(user.id)} className="text-blue-600 hover:text-blue-800 mr-3 transition-colors border p-2 rounded-lg">Edit</button>
-                        <button onClick={()=>userdatadestroyfunc(user.id)} className="text-red-600 hover:text-red-800 transition-colors border p-2 rounded-lg">Delete</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Empty State */}
-            {users.length === 0 && (
-              <div className="p-8 text-center">
-                <div className="text-gray-400 mb-4 text-6xl">👥</div>
-                <h3 className="text-xl font-medium text-gray-600">No users found</h3>
-                <p className="text-gray-500 mt-2">There are currently no registered users</p>
-              </div>
-            )}
-          </div>
-        </div>
+  <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+  <AdminSidebar />
+  
+  <div className="flex-1 p-4 md:p-8 overflow-y-auto">
+    <div className="max-w-7xl mx-auto">
+      {/* Shining Header */}
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-xl p-4 md:p-6 mb-6 md:mb-8 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-white opacity-10 rounded-full transform translate-x-12 -translate-y-12 md:translate-x-16 md:-translate-y-16"></div>
+        <div className="absolute bottom-0 left-0 w-24 h-24 md:w-32 md:h-32 bg-white opacity-10 rounded-full transform -translate-x-12 translate-y-12 md:-translate-x-16 md:translate-y-16"></div>
+        <h1 className="text-2xl md:text-3xl font-bold text-white relative z-10">User Management</h1>
+        <p className="text-indigo-100 mt-1 md:mt-2 relative z-10 text-sm md:text-base">Manage all registered users</p>
       </div>
-      <Toaster position='bottom-right'/>
+
+      {/* Users Table */}
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th className="px-3 py-2 md:px-5 md:py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  ID
+                </th>
+                <th className="px-3 py-2 md:px-5 md:py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Name
+                </th>
+                <th className="px-3 py-2 md:px-5 md:py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Email
+                </th>
+                <th className="px-3 py-2 md:px-5 md:py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Details
+                </th>
+                <th className="px-3 py-2 md:px-5 md:py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-3 py-2 md:px-5 md:py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-3 py-2 md:px-5 md:py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-nowrap">{user.id}</p>
+                  </td>
+                  <td className="px-3 py-2 md:px-5 md:py-5 border-b border-gray-200 bg-white text-sm">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-medium">
+                        {user.username.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="ml-2 md:ml-3">
+                        <p className="text-gray-900 whitespace-nowrap font-medium">
+                          {user.username}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-3 py-2 md:px-5 md:py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-nowrap truncate max-w-[120px] md:max-w-none">
+                      {user.email}
+                    </p>
+                  </td>
+                  <td className="px-3 py-2 md:px-5 md:py-5 border-b border-gray-200 bg-white text-sm">
+                    <button 
+                      onClick={(e) => userdetailfunc(user.id)} 
+                      className="text-blue-600 hover:text-blue-800 mr-2 md:mr-3 transition-colors border p-1 md:p-2 rounded-lg text-xs md:text-sm"
+                    >
+                      Details
+                    </button>
+                  </td>
+                  <td className="px-3 py-2 md:px-5 md:py-5 border-b border-gray-200 bg-white text-sm">
+                    <span className={`px-2 py-1 text-xs rounded-full ${
+                      user.active111
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-red-100 text-red-800'
+                    }`}>
+                      {user.active ? 'Active' : 'Inactive'}
+                    </span>
+                  </td>
+                  <td className="px-3 py-2 md:px-5 md:py-5 border-b border-gray-200 bg-white text-sm">
+                    <div className="flex space-x-1 md:space-x-2">
+                      <button 
+                        onClick={() => updateuserdatafunc(user.id)} 
+                        className="text-blue-600 hover:text-blue-800 transition-colors border p-1 md:p-2 rounded-lg text-xs md:text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => userdatadestroyfunc(user.id)} 
+                        className="text-red-600 hover:text-red-800 transition-colors border p-1 md:p-2 rounded-lg text-xs md:text-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Empty State */}
+        {users.length === 0 && (
+          <div className="p-6 md:p-8 text-center">
+            <div className="text-gray-400 mb-3 md:mb-4 text-4xl md:text-6xl">👥</div>
+            <h3 className="text-lg md:text-xl font-medium text-gray-600">No users found</h3>
+            <p className="text-gray-500 mt-1 md:mt-2 text-sm md:text-base">There are currently no registered users</p>
+          </div>
+        )}
+      </div>
     </div>
+  </div>
+  <Toaster position='bottom-right'/>
+</div>
   );
 };
 
