@@ -70,9 +70,9 @@ let subfunc = async (e) => {
 
 let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,password_two:null})  
     return (
-<div className="bgimage min-h-screen w-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 bg-cover bg-center bg-no-repeat relative overflow-hidden">
+<div className="bgimage min-h-screen w-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 bg-cover bg-center relative overflow-x-hidden overflow-y-auto no-scrollbar">
       {/* Animated Background Elements - Smaller on mobile */}
-      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 ">
         <div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 w-40 sm:w-80 h-40 sm:h-80 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-20 sm:-bottom-40 -left-20 sm:-left-40 w-40 sm:w-80 h-40 sm:h-80 bg-gradient-to-r from-pink-400/20 to-red-600/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-r from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
@@ -138,90 +138,64 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
 
       {/* Enhanced Mobile Styles */}
       <style jsx>{`
-        /* Mobile-first responsive design */
-        @media (max-width: 640px) {
-          .min-h-screen {
-            min-height: 100vh;
-            min-height: 100dvh; /* For mobile browsers */
-          }
-          
-          /* Ensure proper mobile scaling */
-          .bgimage {
-            touch-action: manipulation;
-            -webkit-overflow-scrolling: touch;
-          }
-          
-          /* Mobile input optimization */
-          input {
-            font-size: 16px !important; /* Prevents zoom on iOS */
-            -webkit-appearance: none;
-            border-radius: 8px;
-          }
-          
-          /* Better mobile button */
-          button {
-            min-height: 48px; /* Touch target size */
-            -webkit-appearance: none;
-          }
-        }
-        
-        @media (max-width: 768px) {
-          /* Tablet adjustments */
-          .backdrop-blur-lg {
-            backdrop-filter: blur(12px);
-          }
-        }
-        
-        /* Animation optimizations for mobile */
-        @media (prefers-reduced-motion: reduce) {
-          .animate-pulse {
-            animation: none;
-          }
-          .transition-transform {
-            transition: none;
-          }
-        }
-        
-        /* Custom animations */
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(180deg); }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Custom scrollbar for webkit browsers */
-        ::-webkit-scrollbar {
-          width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Improved focus states for accessibility */
-        input:focus {
-          outline: 2px solid rgba(59, 130, 246, 0.5);
-          outline-offset: 2px;
-        }
-        
-        button:focus {
-          outline: 2px solid rgba(59, 130, 246, 0.5);
-          outline-offset: 2px;
-        }
-      `}</style>
+    @media (max-width: 640px) {
+      .min-h-screen {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+      .bgimage {
+        touch-action: manipulation;
+        -webkit-overflow-scrolling: touch;
+      }
+      input {
+        font-size: 16px !important;
+        -webkit-appearance: none;
+        border-radius: 8px;
+      }
+      button {
+        min-height: 48px;
+        -webkit-appearance: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .backdrop-blur-lg { backdrop-filter: blur(12px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-pulse, .transition-transform {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(180deg); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    /* Custom scrollbar styling for other elements if needed */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.5);
+    }
+    input:focus:not(:focus-visible), button:focus:not(:focus-visible) {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    input:focus-visible, button:focus-visible {
+      outline: 2px solid rgba(59,130,246,0.5);
+      outline-offset: 2px;
+    }
+  `}</style>
+
     </div>
   );
 }
