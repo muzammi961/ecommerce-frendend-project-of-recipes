@@ -70,23 +70,56 @@ let subfunc = async (e) => {
 
 let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,password_two:null})  
     return (
-   <div className="w-full h-auto md:h-screen overflow-hidden bgimage bg-cover bg-center bg-no-repeat">
-      <div className="m-4 w-full flex items-center justify-between px-6 py-3">
-          <img src={hotellogo} alt="Logo"  className=" rounded-lg  border-6 w-15 h-15"/>
-         <Link className="m-4 text-white px-4 py-2 rounded bg-white/10 backdrop-blur-3xl hover:bg-black/40 transition" to={'loginpage/'}>Login</Link>
-      </div>   
+
+    <div className="bgimage h-screen w-full min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 bg-cover bg-center bg-no-repeat relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-pink-400/20 to-red-600/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+
+      {/* Header */}
+      <header className="relative z-10 m-2 sm:m-4 w-auto flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3">
+        <img 
+          src={hotellogo} 
+          alt="Logo"  
+          className="rounded-lg border-2 border-white/30 w-12 h-12 sm:w-15 sm:h-15 shadow-lg hover:scale-105 transition-transform duration-300"
+        />
+        <Link 
+          className="text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-xl hover:bg-white/20 transition-all duration-300 text-sm sm:text-base shadow-lg border border-white/20 hover:scale-105" 
+          to={'loginpage/'}
+        >
+          Login
+        </Link>
+      </header>   
           
-      <div className="flex flex-col md:flex-row w-full h-auto md:h-[calc(100vh-60px)]">
-        <div className=" m-6 rounded-lg md:m-12 w-full md:w-1/2 md:h-full backdrop-blur-md bg-white/20 flex justify-center items-center p-6 md:p-12">
-         
-          <div className="text-white text-center w-full">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Register</h1>
-            <p className="text-lg">Discover quality products and great deals every day!</p>
-            <img className='rounded-lg w-full h-auto max-w-sm mx-auto mt-4'src={hotellogo} alt="hotel logo"/>
+      {/* Main Content */}
+      <main className="relative z-10 flex flex-col lg:flex-row w-full min-h-[calc(100vh-80px)] px-2 sm:px-0">
+        
+        {/* Left Panel - Welcome Section */}
+        <section className="m-2 sm:m-6 lg:m-12 w-full lg:w-1/2 backdrop-blur-lg bg-white/15 rounded-2xl flex justify-center items-center p-4 sm:p-6 lg:p-12 shadow-2xl border border-white/20 hover:bg-white/20 transition-all duration-500">
+          <div className="text-white text-center w-full space-y-4 sm:space-y-6">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent leading-tight">
+              Register
+            </h1>
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed px-2">
+              Discover quality products and great deals every day!
+            </p>
+            <div className="mt-4 sm:mt-6">
+              <img 
+                className='rounded-xl w-full h-auto max-w-xs sm:max-w-sm mx-auto shadow-2xl border-2 border-white/30 hover:scale-105 transition-transform duration-500' 
+                src={hotellogo} 
+                alt="hotel logo"
+              />
+            </div>
           </div>
-        </div>
-        <div className="w-full md:w-1/2 flex items-center justify-center p-6">
-          <form onSubmit={subfunc} className="flex flex-col p-8 rounded-lg gap-4 w-full bg-white/30 border border-white">
+        </section>
+        
+        {/* Right Panel - Registration Form */}
+        <section className="w-full lg:w-1/2 flex items-center justify-center p-2 sm:p-6">
+          <div className="w-full max-w-md mx-auto">
+             <form onSubmit={subfunc} className="flex flex-col p-8 rounded-lg gap-4 w-full bg-white/30 border border-white">
                <h1 className='justify-center flex text-white text-bold sm:text-4xl'>Registration page</h1>
 
             <input name='name' onChange={(e) => dispatch({ name:'username', value: e.target.value })}  type="text" placeholder="Name :" className="placeholder-white placeholder:font-bold outline-none px-3 py-2 rounded text-black backdrop-blur"/>
@@ -98,9 +131,49 @@ let [state,dispatch]=useReducer(reducer,{username:'',email:"",password:null,pass
               <button className='rounded px-4 py-2 backdrop-blur-3xl  hover:bg-black/40' type="submit">Submit</button>
             </div>
           </form>
-        </div>
-      </div>
-     <Toaster position='bottom-right' reverseOrder={false}/>
+          </div>
+        </section>
+      </main>
+      
+      <Toaster position='bottom-right' reverseOrder={false}/>
+
+      {/* Custom Styles for Enhanced Animations */}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          .min-h-screen {
+            min-height: 100vh;
+            min-height: 100dvh; /* For mobile browsers */
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(180deg); }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.5);
+        }
+      `}</style>
     </div>
   );
 }
