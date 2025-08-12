@@ -72,15 +72,15 @@ function Userformaddress() {
         </div>
 
         <form className="p-4 sm:p-6 space-y-4 sm:space-y-6" onSubmit={submitButton}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="space-y-1 sm:space-y-2">
-              <label className="block text-xs sm:text-sm font-medium text-amber-700">Full Name</label>
-              <div className="relative">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+    <div className="space-y-1 sm:space-y-2">
+      {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">Full Name</label> */}
+      <div className="relative">
                 <input
                   onChange={(e) => dispatch({ name: 'nameofuser', value: e.target.value })}
                   type="text"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                  placeholder="John Doe"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                  placeholder="Full Name"
                   required
                 />
                 <svg
@@ -95,13 +95,13 @@ function Userformaddress() {
             </div>
 
             <div className="space-y-1 sm:space-y-2">
-              <label className="block text-xs sm:text-sm font-medium text-amber-700">Phone Number</label>
+              {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">Phone Number</label> */}
               <div className="relative">
                 <input
                   onChange={(e) => dispatch({ name: 'phonenumber', value: e.target.value })}
-                  type="tel"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                  placeholder="+1 234 567 890"
+                  type="number"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                  placeholder="Phone Number"
                   required
                 />
                 <svg
@@ -118,13 +118,13 @@ function Userformaddress() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="space-y-1 sm:space-y-2">
-              <label className="block text-xs sm:text-sm font-medium text-amber-700">Pincode</label>
+              {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">Pincode</label> */}
               <div className="relative">
                 <input
                   onChange={(e) => dispatch({ name: 'pincode', value: e.target.value })}
                   type="number"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                  placeholder="123456"
+                 className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                  placeholder="Pincode"
                   required
                 />
                 <svg
@@ -140,13 +140,13 @@ function Userformaddress() {
             </div>
 
             <div className="space-y-1 sm:space-y-2">
-              <label className="block text-xs sm:text-sm font-medium text-amber-700">State</label>
+              {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">State</label> */}
               <div className="relative">
                 <input
                   onChange={(e) => dispatch({ name: 'state', value: e.target.value })}
                   type="text"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                  placeholder="California"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                  placeholder="State"
                   required
                 />
                 <svg
@@ -161,13 +161,13 @@ function Userformaddress() {
             </div>
 
             <div className="space-y-1 sm:space-y-2">
-              <label className="block text-xs sm:text-sm font-medium text-amber-700">City</label>
+              {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">City</label> */}
               <div className="relative">
                 <input
                   onChange={(e) => dispatch({ name: 'city', value: e.target.value })}
                   type="text"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                  placeholder="Los Angeles"
+                 className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                  placeholder="City"
                   required
                 />
                 <svg
@@ -183,13 +183,13 @@ function Userformaddress() {
           </div>
 
           <div className="space-y-1 sm:space-y-2">
-            <label className="block text-xs sm:text-sm font-medium text-amber-700">House No / Building</label>
+            {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">House No / Building</label> */}
             <div className="relative">
               <input
                 onChange={(e) => dispatch({ name: 'houseno_buildingname', value: e.target.value })}
                 type="text"
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                placeholder="Apt 42, Sunshine Towers"
+               className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                placeholder="House No / Building"
                 required
               />
               <svg
@@ -204,13 +204,13 @@ function Userformaddress() {
           </div>
 
           <div className="space-y-1 sm:space-y-2">
-            <label className="block text-xs sm:text-sm font-medium text-amber-700">Street / Area</label>
+            {/* <label className="block text-xs sm:text-sm font-medium text-amber-700">Street / Area</label> */}
             <div className="relative">
               <input
                 onChange={(e) => dispatch({ name: 'Roadname', value: e.target.value })}
                 type="text"
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent bg-white/90 transition-all text-sm sm:text-base"
-                placeholder="Main Street"
+               className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 border border-amber-200 rounded-lg bg-white/90 text-sm sm:text-base focus:outline-none focus:ring-0 focus:border-transparent focus:ring-offset-0"
+                placeholder="Street / Area"
                 required
               />
               <svg
