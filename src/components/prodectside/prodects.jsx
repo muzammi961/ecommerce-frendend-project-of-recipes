@@ -217,7 +217,7 @@ function ProductData() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Navigation Bar */}
       <nav className="bg-gradient-to-r from-amber-400 to-amber-500 w-full sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -230,8 +230,8 @@ function ProductData() {
             <span>FoodieZone</span>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex-1 overflow-x-auto whitespace-nowrap no-scrollbar">
+          {/* Category Tabs - Scrollable on mobile */}
+          <div className="flex-1 w-full overflow-x-auto whitespace-nowrap no-scrollbar">
             <div className="flex space-x-2 md:space-x-4">
               {categorydata.map((cat) => (
                 <button
@@ -249,7 +249,7 @@ function ProductData() {
             </div>
           </div>
 
-          {/* Search and Actions */}
+          {/* Search and Actions - Stack on mobile */}
           <div className="flex items-center gap-3 w-full md:w-auto">
             <div className="relative flex-1 md:w-64">
               <input 
@@ -268,41 +268,42 @@ function ProductData() {
               </svg>
             </div>
 
-            <button onClick={WishlistSection} className="p-2 rounded-full bg-white text-red-500 hover:bg-red-50 transition-colors shadow-md" aria-label="Wishlist">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-              </svg>
-            </button>
-
-            <button onClick={CartSection} className="p-2 rounded-full bg-white text-green-600 hover:bg-green-50 transition-colors shadow-md relative" aria-label="Cart">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-              </svg>
-              {/* <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span> */}
-            </button>
-
-            <div className="relative">
-              <button 
-                className="py-1 px-3 bg-gradient-to-r from-[#6e8efb] to-[#a777e3] text-white border-none rounded-md text-xs font-semibold cursor-pointer shadow-sm transition-all duration-200 relative overflow-hidden hover:shadow-md active:translate-y-0"
-                onClick={() => setShowActions(!showActions)}
-              >
-                {showActions ? 'Hide Menu' : 'Account Menu'}
-                <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_45%,rgba(255,255,255,0.3)_48%,rgba(255,255,255,0)_50%,rgba(255,255,255,0)_100%)] rotate-[30deg] animate-[shine_3s_infinite_linear]"></span>
+            <div className="flex items-center gap-2">
+              <button onClick={WishlistSection} className="p-2 rounded-full bg-white text-red-500 hover:bg-red-50 transition-colors shadow-md" aria-label="Wishlist">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
               </button>
-              
-              {showActions && (
-                <div className="absolute right-0 z-20 w-[160px] flex flex-col gap-1 mt-1 animate-[fadeIn_0.2s_ease-out]">
-                  <button onClick={changpasswordfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#d35400]">
-                    Change Password
-                  </button>
-                  <button onClick={logoutfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#c0392b]">
-                    Logout
-                  </button>
-                  <button onClick={orderdetailsfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#16a085]">
-                    Order Details
-                  </button>
-                </div>
-              )}
+
+              <button onClick={CartSection} className="p-2 rounded-full bg-white text-green-600 hover:bg-green-50 transition-colors shadow-md relative" aria-label="Cart">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </button>
+
+              <div className="relative">
+                <button 
+                  className="py-1 px-3 bg-gradient-to-r from-[#6e8efb] to-[#a777e3] text-white border-none rounded-md text-xs font-semibold cursor-pointer shadow-sm transition-all duration-200 relative overflow-hidden hover:shadow-md active:translate-y-0"
+                  onClick={() => setShowActions(!showActions)}
+                >
+                  {showActions ? 'Hide Menu' : 'Account Menu'}
+                  <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_45%,rgba(255,255,255,0.3)_48%,rgba(255,255,255,0)_50%,rgba(255,255,255,0)_100%)] rotate-[30deg] animate-[shine_3s_infinite_linear]"></span>
+                </button>
+                
+                {showActions && (
+                  <div className="absolute right-0 z-20 w-[160px] flex flex-col gap-1 mt-1 animate-[fadeIn_0.2s_ease-out]">
+                    <button onClick={changpasswordfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#d35400]">
+                      Change Password
+                    </button>
+                    <button onClick={logoutfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#c0392b]">
+                      Logout
+                    </button>
+                    <button onClick={orderdetailsfunc} className="w-full py-1.5 px-3 bg-[#f5f5f5] border border-solid border-[#ddd] rounded text-xs text-left cursor-pointer transition-all duration-150 hover:bg-[#e9e9e9] hover:translate-x-0.5 text-[#16a085]">
+                      Order Details
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -310,8 +311,8 @@ function ProductData() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-amber-800 capitalize">{categoryName || "All Products"}</h2>
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-amber-800 capitalize">{categoryName || "All Products"}</h2>
           <p className="text-amber-600">Showing {filteredData.length > 0 ? filteredData.length : products.length} items</p>
         </div>
 
@@ -324,16 +325,14 @@ function ProductData() {
 
         {/* Products Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {(filteredData.length > 0 ? filteredData : products).map((item) => (
               <div key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div onClick={() => setSelectedProduct(item)} className="relative h-48 overflow-hidden group">
+                <div onClick={() => setSelectedProduct(item)} className="relative h-48 overflow-hidden group cursor-pointer">
                   <img 
-                    // src={`${apiUrl}${item.item_photo}`} 
                     src={DecodeImageUrl(item.item_photo)}
-                    alt={`${apiUrl}${item.item_photo}`} 
+                    alt={item.productname} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    // onError={handleImageError}
                   />
                   {item.offer_price && (
                     <div className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-md">
@@ -343,7 +342,7 @@ function ProductData() {
                 </div>
 
                 <div className="p-5">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{item.productname}</h3>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">{item.productname}</h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{item.description}</p>
 
                   <div className="flex items-center justify-between mb-4">
@@ -368,7 +367,7 @@ function ProductData() {
                   <div className="grid grid-cols-3 gap-2">
                     <button 
                       onClick={() => addOrder(item.id)} 
-                      className="px-3 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-lg hover:from-amber-500 hover:to-amber-600 transition-all duration-300 text-sm font-medium flex items-center justify-center"
+                      className="px-2 py-1 sm:px-3 sm:py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-lg hover:from-amber-500 hover:to-amber-600 transition-all duration-300 text-xs sm:text-sm font-medium flex items-center justify-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
@@ -377,7 +376,7 @@ function ProductData() {
                     </button>
                     <button 
                       onClick={() => addToCart(item.id)}
-                      className="px-3 py-2 bg-amber-100 text-amber-800 rounded-lg hover:bg-amber-200 transition-all duration-300 text-sm font-medium flex items-center justify-center"
+                      className="px-2 py-1 sm:px-3 sm:py-2 bg-amber-100 text-amber-800 rounded-lg hover:bg-amber-200 transition-all duration-300 text-xs sm:text-sm font-medium flex items-center justify-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -386,7 +385,7 @@ function ProductData() {
                     </button>
                     <button 
                       onClick={() => addToWishlist(item.id)} 
-                      className="px-3 py-2 bg-amber-100 text-amber-800 rounded-lg hover:bg-amber-200 transition-all duration-300 text-sm font-medium flex items-center justify-center"
+                      className="px-2 py-1 sm:px-3 sm:py-2 bg-amber-100 text-amber-800 rounded-lg hover:bg-amber-200 transition-all duration-300 text-xs sm:text-sm font-medium flex items-center justify-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
