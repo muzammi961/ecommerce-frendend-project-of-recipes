@@ -19,7 +19,7 @@ let subfunc = async (e) => {
   let isValid = true;
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+  const strongPasswordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
   if (!state.username || state.username.trim() === '') {
     toast.error('Username is required');
@@ -36,7 +36,7 @@ let subfunc = async (e) => {
   }
 
   if (!state.password || !strongPasswordRegex.test(state.password)) {
-    toast.error('Password must be 6+ characters, include upper/lowercase, number, and special character');
+   toast.error('Password must be at least 6 characters long and include a lowercase letter, a number, and a special character.');
     return
   }
 
